@@ -22,15 +22,22 @@ public class About_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("About");
+        sharedPreferences=getSharedPreferences("prefs",MODE_PRIVATE);
+        isDark = sharedPreferences.getBoolean("isDark",true);
+
+        if(isDark)
+            setTheme(R.style.DarkAppTheme);
+        else
+            setTheme(R.style.AppTheme);
         setContentView(R.layout.about_screen);
 
-        sharedPreferences=getSharedPreferences("prefs",MODE_PRIVATE);
+
         card1=(CardView)findViewById(R.id.card1);
         card2=(CardView)findViewById(R.id.card2);
 
 
 
-        isDark = sharedPreferences.getBoolean("isDark",true);
+
         if(isDark){
             card1.setBackgroundColor(getResources().getColor(R.color.dark_grey));
             card2.setBackgroundColor(getResources().getColor(R.color.dark_grey));
