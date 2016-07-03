@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- The ActionBar displayed at the top -->
+    <include
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addscreeen_toolbar"/>
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/addscreeen_toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:id="@+id/addScreen_toplayout"
+            android:transitionName="addScreen_toplayout">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/addscreen_text1"
+                android:transitionName="transTitle"
+                android:hint="Note Title"
+                android:typeface="monospace"
+                android:gravity="top"
+                android:paddingTop="25dp"
+                android:layout_marginLeft="@dimen/layout_side_margin"
+                android:layout_marginRight="@dimen/layout_side_margin"
+                android:layout_gravity="bottom"
+                android:background="@android:color/transparent" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:id="@+id/addscreen_bottomlayout"
+            android:transitionName="addscreen_bottomlayout"
+            android:layout_below="@+id/addScreen_toplayout"
+            android:layout_alignParentBottom="true">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                android:hint="What's in your mind?"
+                android:id="@+id/addscreen_text2"
+                android:transitionName="transContent"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="@dimen/layout_side_margin"
+                android:layout_marginLeft="@dimen/layout_side_margin"
+                android:gravity="top"
+                android:typeface="monospace"
+                android:background="@android:color/transparent"/>
+        </RelativeLayout>
+    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addscreen_fab"
+        android:transitionName="trans_add_fab"
+        android:elevation="50dp"
+        android:src="@drawable/svg_save_white_36px"
+        android:layout_marginTop="155dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        />
+</RelativeLayout>

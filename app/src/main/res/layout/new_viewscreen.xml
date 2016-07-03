@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewscreeen_toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewscreeen_toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:id="@+id/viewScreen_toplayout"
+            android:transitionName="card">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/viewScreen_title"
+                android:transitionName="transTitle"
+                android:text="title"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:layout_marginLeft="@dimen/layout_side_margin"
+                android:layout_marginRight="@dimen/layout_side_margin"
+                android:gravity="top"
+                android:paddingTop="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewScreen_date"
+                android:transitionName="transDate"
+                android:text="date"
+                android:textColor="#000000"
+                android:gravity="right"
+                android:layout_marginRight="@dimen/layout_side_margin"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignEnd="@+id/viewScreen_title"
+                android:layout_marginEnd="0dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/viewScreen_toplayout"
+            android:id="@+id/viewscreen_bottom_layout">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:text="content"
+                android:textSize="17dp"
+                android:transitionName="transContent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/viewScreen_content"
+                android:layout_marginRight="@dimen/layout_side_margin"
+                android:layout_marginLeft="@dimen/layout_side_margin"
+                android:gravity="top"
+                android:paddingTop="20dp"
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view_fab"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/svg_mode_edit_white_36px"
+        android:elevation="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        />
+
+
+</RelativeLayout>

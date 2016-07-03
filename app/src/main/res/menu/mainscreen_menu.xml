@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.toolbar.MainActivity">
+    <item
+        android:id="@+id/menu_SETTINGS"
+        android:icon="@drawable/svg_settings_white_36px"
+        android:title="Settings"
+        app:showAsAction="always"
+        android:orderInCategory="3"
+        android:menuCategory="secondary"
+        />
+
+
+    <item android:id="@+id/changeListGrid"
+        android:icon="@drawable/svg_view_quilt_white_36px"
+        android:title="changeListGrid"
+        app:showAsAction="always"
+        android:orderInCategory="2"
+        android:menuCategory="secondary"/>
+
+    <item android:id="@+id/darkMode"
+        android:title="darkMode"
+        app:showAsAction="always"
+        android:orderInCategory="1"
+        android:menuCategory="secondary"
+        android:icon="@drawable/invert_colors_white_24px"/>
+
+</menu>

@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Simple Note</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="empty_listtext1">No Notes </string>
+    <string name="empty_listtext2">Click The Add Button Below To Add </string>
+    <string name="dialog_title">Pick a color</string>
+    <string name="restoreMessage"> Click Restore to restore the note</string>
+
+
+    <string name="about_app">A Material Design App with Colorful Notes.</string>
+    <string name="developer_name">Tejas Bhitle</string>
+    <string name="developer_mail">bhitletejas@gmail.com</string>
+    <string name="github_link">https://github.com/TejasBhitle/TO_DO_LIST.git</string>
+    <string name="NoClientFound">No email client found</string>
+
+    <string name="save_string">Do you want to save ?</string>
+    <string name="delete_prompt">Do You Want To Delete ?</string>
+    <string name="trash_move">Moved To Trash</string>
+    <string name="share_text">Choose App to Share</string>
+    <string name="clipboard">Copied to clipboard</string>
+
+    <string-array name="my_color_array">
+       <item>@color/RED</item>
+        <item>@color/MAROON</item>
+        <item>@color/PURPLE</item>
+        <item>@color/INDIGO</item>
+        <item>@color/BLUE</item>
+        <item>@color/CYAN</item>
+        <item>@color/LGREEN</item>
+        <item>@color/GREEN</item>
+        <item>@color/YELLOW</item>
+        <item>@color/ORANGE</item>
+        <item>@color/BROWN</item>
+        <item>@color/GREY</item>
+
+    </string-array>
+</resources>
