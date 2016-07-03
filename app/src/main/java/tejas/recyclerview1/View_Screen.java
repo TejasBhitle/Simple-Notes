@@ -68,7 +68,7 @@ public class View_Screen extends AppCompatActivity{
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if(isDark){
-            bottom_layout.setBackgroundColor(R.color.dark_theme_background);
+            bottom_layout.setBackgroundColor(getResources().getColor(R.color.dark_theme_background));
         }
 
         db = new DBHelper(this);
@@ -199,7 +199,7 @@ public class View_Screen extends AppCompatActivity{
 
     public void BuildNotification(String title,String Content){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.drawable.note_edited)
+        builder.setSmallIcon(R.drawable.my_app_icon)
                 .setContentTitle(title)
                 .setContentText(Content)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(Content));

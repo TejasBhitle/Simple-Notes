@@ -43,8 +43,8 @@ public class About_Screen extends AppCompatActivity {
             card2.setBackgroundColor(getResources().getColor(R.color.dark_grey));
         }
         else{
-            card1.setBackgroundColor(getResources().getColor(R.color.light_theme_background));
-            card2.setBackgroundColor(getResources().getColor(R.color.light_theme_background));
+            card1.setBackgroundColor(getResources().getColor(R.color.card_light));
+            card2.setBackgroundColor(getResources().getColor(R.color.card_light));
         }
 
         // Set a Toolbar to replace the ActionBar.

@@ -29,5 +29,6 @@
     <color name="GREY">#607D8B</color>
 
     <color name="dark_grey">#212121</color>
+    <color name="card_light">#ffca28</color>
 
 </resources>

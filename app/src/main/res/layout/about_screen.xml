@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             app:cardElevation="4dp"
+            android:background="@color/card_light"
             android:id="@+id/card1"
             android:layout_margin="8dp">
             <LinearLayout
@@ -34,7 +35,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:id="@+id/app_icon"
-                        android:src="@drawable/note_edited"
+                        android:src="@drawable/my_app_icon"
                         android:layout_margin="10dp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -73,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:id="@+id/card2"
+            android:background="@color/card_light"
             app:cardElevation="4dp"
             android:layout_below="@+id/card1"
             android:layout_margin="8dp">
@@ -89,6 +91,8 @@
                         android:layout_height="100dp"
                         android:id="@+id/profile_pic"
                         android:src="@drawable/me"
+                        android:background="#000000"
+                        android:padding="1dp"
                         android:layout_margin="10dp"/>
                     <LinearLayout
                         android:layout_width="match_parent"

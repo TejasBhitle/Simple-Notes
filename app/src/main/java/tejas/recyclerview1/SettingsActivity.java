@@ -114,6 +114,10 @@ public class SettingsActivity extends AppCompatActivity{
             //settings_layout.setBackgroundColor(getResources().getColor(R.color.background_dark));
             card1.setBackgroundColor(getResources().getColor(R.color.dark_theme_background));
             card2.setBackgroundColor(getResources().getColor(R.color.dark_theme_background));
+        }
+        else{
+            card1.setBackgroundColor(getResources().getColor(R.color.light_theme_background));
+            card2.setBackgroundColor(getResources().getColor(R.color.light_theme_background));
 
         }
     }
