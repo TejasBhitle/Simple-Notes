@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             app:cardElevation="4dp"
-            android:background="@color/card_light"
+            app:cardBackgroundColor="@color/card_light"
             android:id="@+id/card1"
             android:layout_margin="8dp">
             <LinearLayout
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:id="@+id/card2"
-            android:background="@color/card_light"
+            app:cardBackgroundColor="@color/card_light"
             app:cardElevation="4dp"
             android:layout_below="@+id/card1"
             android:layout_margin="8dp">
