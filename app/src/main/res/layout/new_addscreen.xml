@@ -15,14 +15,14 @@
         android:layout_width="wrap_content"
         android:layout_below="@id/addscreeen_toolbar">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="125dp"
             android:id="@+id/addScreen_toplayout"
             android:transitionName="addScreen_toplayout">
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:id="@+id/addscreen_text1"
                 android:transitionName="transTitle"
                 android:hint="Note Title"
@@ -33,8 +33,8 @@
                 android:layout_gravity="bottom"
                 android:background="@android:color/transparent" />
 
-        </RelativeLayout>
-        <RelativeLayout
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="340dp"
             android:id="@+id/addscreen_bottomlayout"
@@ -54,7 +54,7 @@
                     android:paddingBottom="30dp"
                     android:background="@android:color/transparent"/>
 
-        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
