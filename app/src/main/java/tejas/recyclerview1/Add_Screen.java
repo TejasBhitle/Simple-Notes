@@ -2,6 +2,7 @@ package tejas.recyclerview1;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
@@ -75,35 +76,41 @@ public class Add_Screen extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        bundle = getIntent().getExtras();
 
-        if(bundle != null)//called to edit
-        {
-            id = bundle.getInt("id");
-            Cursor cursor = mydb.getData(id);
-            cursor.moveToFirst();
+            bundle = getIntent().getExtras();
 
-            String pre_title = cursor.getString(cursor.getColumnIndex(DBHelper.COL_TITLE));
-            String pre_content = cursor.getString(cursor.getColumnIndex(DBHelper.COL_CONTENT));
-            pre_color = cursor.getString(cursor.getColumnIndex(DBHelper.COL_COLOR));
+            if(bundle != null)//called to edit
+            {
+                id = bundle.getInt("id");
+                Cursor cursor = mydb.getData(id);
+                cursor.moveToFirst();
 
-            title_text.setText(pre_title);
-            content_text.setText(pre_content);
-            top_layout.setBackgroundColor(Integer.parseInt(pre_color));
-            mytoolbar.setBackgroundColor(Integer.parseInt(pre_color));
-            if(Build.VERSION.SDK_INT >= 21){
-                getWindow().setStatusBarColor(Integer.parseInt(pre_color));
+                String pre_title = cursor.getString(cursor.getColumnIndex(DBHelper.COL_TITLE));
+                String pre_content = cursor.getString(cursor.getColumnIndex(DBHelper.COL_CONTENT));
+                pre_color = cursor.getString(cursor.getColumnIndex(DBHelper.COL_COLOR));
+
+                title_text.setText(pre_title);
+                content_text.setText(pre_content);
+                top_layout.setBackgroundColor(Integer.parseInt(pre_color));
+                mytoolbar.setBackgroundColor(Integer.parseInt(pre_color));
+                if(Build.VERSION.SDK_INT >= 21){
+                    getWindow().setStatusBarColor(Integer.parseInt(pre_color));
+                }
+                cursor.close();
             }
-            cursor.close();
-        }
-        else{
-            default_color = getRandom(color_array);
-            top_layout.setBackgroundColor(default_color);
-            mytoolbar.setBackgroundColor(default_color);
-            if(Build.VERSION.SDK_INT >= 21){
-                getWindow().setStatusBarColor(default_color);
+            else{
+                default_color = getRandom(color_array);
+                top_layout.setBackgroundColor(default_color);
+                mytoolbar.setBackgroundColor(default_color);
+                if(Build.VERSION.SDK_INT >= 21){
+                    getWindow().setStatusBarColor(default_color);
+                }
             }
-        }
+
+
+
+
+
 
 
 
@@ -158,6 +165,7 @@ public class Add_Screen extends AppCompatActivity {
         String contentEntered = content_text.getText().toString();
 
         if(titleEntered.matches("") && contentEntered.matches("")){
+            //nothing entered
             Toast.makeText(Add_Screen.this,"Cant Save Empty Note",Toast.LENGTH_SHORT).show();
         }
         else{

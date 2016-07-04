@@ -132,16 +132,16 @@ public class View_Screen extends AppCompatActivity{
                 BuildNotification(title_string,content_string);
                 break;
             case R.id.viewscreen_clipboard:
-                CopyToClipboard(content_string);
+                CopyToClipboard(content_string,title_string);
                 Toast.makeText(getApplicationContext(),R.string.clipboard,Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;
     }
 
-    private void CopyToClipboard(String content_string) {
+    private void CopyToClipboard(String content_string, String title_string) {
         ClipboardManager clipboard =(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Copied Text",content_string);
+        ClipData clip = ClipData.newPlainText("Copied Text",title_string +"\n" + content_string);
         clipboard.setPrimaryClip(clip);
     }
 
