@@ -220,7 +220,7 @@ public class Add_Screen extends AppCompatActivity {
         if(bundle != null )//called to edit
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.save_string)
+            builder.setMessage(R.string.discard_changes)
                     .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

@@ -126,7 +126,7 @@ public class View_Screen extends AppCompatActivity{
                 ShowDeleteDialog();
                 break;
             case R.id.viewscreen_share:
-                ShareData(content_string);
+                ShareData(content_string,title_string);
                 break;
             case R.id.viewscreen_notify:
                 BuildNotification(title_string,content_string);
@@ -190,10 +190,10 @@ public class View_Screen extends AppCompatActivity{
         supportFinishAfterTransition();
     }
 
-    public void ShareData(String data){
+    public void ShareData(String content,String title){
         Intent i = new Intent();
         i.setAction(Intent.ACTION_SEND);
-        i.putExtra(Intent.EXTRA_TEXT,data);
+        i.putExtra(Intent.EXTRA_TEXT, title+"\n" +content);
         i.setType("text/plain");
         startActivity(Intent.createChooser(i,"Choose App to Share"));
     }

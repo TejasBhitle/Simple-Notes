@@ -15,6 +15,7 @@
     <string name="github_link">https://github.com/TejasBhitle/Simple-Notes.git</string>
     <string name="NoClientFound">No email client found</string>
 
+    <string name="discard_changes">Discard Changes ?</string>
     <string name="save_string">Do you want to save ?</string>
     <string name="delete_prompt">Do You Want To Delete ?</string>
     <string name="trash_move">Moved To Trash</string>

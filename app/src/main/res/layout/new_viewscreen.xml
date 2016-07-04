@@ -54,19 +54,26 @@
             android:layout_height="fill_parent"
             android:layout_below="@+id/viewScreen_toplayout"
             android:id="@+id/viewscreen_bottom_layout">
-            <TextView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="340dp"
-                android:text="content"
-                android:textSize="17dp"
-                android:transitionName="transContent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/viewScreen_content"
-                android:layout_marginRight="@dimen/layout_side_margin"
-                android:layout_marginLeft="@dimen/layout_side_margin"
-                android:gravity="top"
-                android:paddingTop="20dp"
-                />
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="340dp"
+                    android:text="content"
+                    android:textSize="17dp"
+                    android:transitionName="transContent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/viewScreen_content"
+                    android:layout_marginRight="@dimen/layout_side_margin"
+                    android:layout_marginLeft="@dimen/layout_side_margin"
+                    android:gravity="top"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="30dp"
+                    />
+
+            </ScrollView>
+
 
         </RelativeLayout>
     </RelativeLayout>

@@ -41,18 +41,19 @@
             android:transitionName="addscreen_bottomlayout"
             android:layout_below="@+id/addScreen_toplayout"
             android:layout_alignParentBottom="true">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_weight="1"
-                android:hint="What's in your mind?"
-                android:id="@+id/addscreen_text2"
-                android:transitionName="transContent"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="@dimen/layout_side_margin"
-                android:layout_marginLeft="@dimen/layout_side_margin"
-                android:gravity="top"
-                android:background="@android:color/transparent"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="What's in your mind?"
+                    android:id="@+id/addscreen_text2"
+                    android:transitionName="transContent"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="@dimen/layout_side_margin"
+                    android:layout_marginLeft="@dimen/layout_side_margin"
+                    android:gravity="top"
+                    android:paddingBottom="30dp"
+                    android:background="@android:color/transparent"/>
+
         </RelativeLayout>
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
