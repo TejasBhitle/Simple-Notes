@@ -44,7 +44,6 @@ public class View_Screen extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("");
         preferences = getSharedPreferences("prefs",MODE_PRIVATE);
         isDark= preferences.getBoolean("isDark",true);
         if(isDark){
@@ -64,8 +63,10 @@ public class View_Screen extends AppCompatActivity{
 
         toolbar =(Toolbar)findViewById(R.id.viewscreeen_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         if(isDark){
             bottom_layout.setBackgroundColor(getResources().getColor(R.color.dark_theme_background));

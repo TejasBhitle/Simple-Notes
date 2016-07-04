@@ -72,6 +72,7 @@ public class Add_Screen extends AppCompatActivity {
         setTitle("Add");
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         bundle = getIntent().getExtras();
