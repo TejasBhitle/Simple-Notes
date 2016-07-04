@@ -12,127 +12,130 @@
         android:id="@+id/about_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/about_layout">
-        <android.support.v7.widget.CardView
+        android:layout_height="match_parent">
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/card_light"
-            android:id="@+id/card1"
-            android:layout_margin="8dp">
-            <LinearLayout
+            android:layout_height="match_parent">
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-                <LinearLayout
+                android:id="@+id/about_layout">
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:padding="8dp">
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/app_icon"
-                        android:src="@drawable/my_app_icon"
-                        android:layout_margin="10dp"/>
+                    android:layout_height="170dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/card_light"
+                    android:id="@+id/card1"
+                    android:layout_margin="8dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
                         android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:textStyle="bold"
-                            android:id="@+id/textview1"
-                            android:padding="10dp"
-                            android:textSize="20dp"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:id="@+id/textview2"
-                            android:text="@string/about_app"/>
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="GitHub"
-                            android:id="@+id/github_button"
-                            android:onClick="github_link"
-                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/card2"
-            app:cardBackgroundColor="@color/card_light"
-            app:cardElevation="4dp"
-            android:layout_below="@+id/card1"
-            android:layout_margin="8dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="8dp">
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/profile_pic"
-                        android:src="@drawable/me"
-                        android:background="#000000"
-                        android:padding="1dp"
-                        android:layout_margin="10dp"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Developer"
-                            android:padding="10dp"
-                            android:textStyle="bold"
-                            android:id="@+id/textview3"
-                            android:textSize="20dp"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:id="@+id/textview4"
-                            android:text="@string/developer_name"/>
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <Button
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Email"
-                                android:id="@+id/email_id"
-                                android:onClick="email"
-                                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
+                            android:layout_height="match_parent"
+                            android:padding="8dp">
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:id="@+id/app_icon"
+                                android:src="@drawable/my_app_icon"
+                                android:layout_margin="10dp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:textStyle="bold"
+                                    android:id="@+id/textview1"
+                                    android:padding="10dp"
+                                    android:textSize="20dp"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:id="@+id/textview2"
+                                    android:text="@string/about_app"/>
+
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="GitHub"
+                                    android:id="@+id/github_button"
+                                    android:onClick="github_link"
+                                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
+
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:id="@+id/card2"
+                    app:cardBackgroundColor="@color/card_light"
+                    app:cardElevation="4dp"
+                    android:layout_below="@+id/card1"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp">
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:id="@+id/profile_pic"
+                                android:src="@drawable/me"
+                                android:background="#000000"
+                                android:padding="1dp"
+                                android:layout_margin="10dp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Developer"
+                                    android:padding="10dp"
+                                    android:textStyle="bold"
+                                    android:id="@+id/textview3"
+                                    android:textSize="20dp"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:id="@+id/textview4"
+                                    android:text="@string/developer_name"/>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Email"
+                                    android:id="@+id/email_id"
+                                    android:onClick="email"
+                                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
 
-    </RelativeLayout>
+            </RelativeLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
 
 </LinearLayout>

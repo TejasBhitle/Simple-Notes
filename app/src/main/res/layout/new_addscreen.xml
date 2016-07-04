@@ -26,7 +26,6 @@
                 android:id="@+id/addscreen_text1"
                 android:transitionName="transTitle"
                 android:hint="Note Title"
-                android:typeface="monospace"
                 android:gravity="top"
                 android:paddingTop="25dp"
                 android:layout_marginLeft="@dimen/layout_side_margin"
@@ -53,7 +52,6 @@
                 android:layout_marginRight="@dimen/layout_side_margin"
                 android:layout_marginLeft="@dimen/layout_side_margin"
                 android:gravity="top"
-                android:typeface="monospace"
                 android:background="@android:color/transparent"/>
         </RelativeLayout>
     </RelativeLayout>
