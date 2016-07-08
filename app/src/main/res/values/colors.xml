@@ -5,7 +5,7 @@
     <color name="dark_theme_background">#202113</color>
     <color name="dark_primaryDark">#37381A</color>
     <color name="dark_primary">#40411E</color>
-    <color name="dark_colorAccent">#C03000</color>
+    <color name="dark_colorAccent">#c0ca33</color>
 
     <!--Light theme colors-->
     <color name="light_theme_background">#FFF8E1</color>
@@ -17,12 +17,10 @@
     <color name="MAROON">#F50057</color>
     <color name="PURPLE">#D500F9</color>
     <color name="INDIGO">#651FFF</color>
-
     <color name="BLUE">#3D5AFE</color>
     <color name="CYAN">#359FF2</color>
-    <color name="LGREEN">#76FF03</color>
+    <color name="TEAL">#4db6ac</color>
     <color name="GREEN">#009E29</color>
-
     <color name="YELLOW">#fdd835</color>
     <color name="ORANGE">#FF9100</color>
     <color name="BROWN">#795548</color>

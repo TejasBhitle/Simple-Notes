@@ -41,6 +41,12 @@ public class DBHelper extends SQLiteOpenHelper{
         return res;
     }
 
+    public Cursor getData(String title){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =db.rawQuery("select * from listdata where title = "+title+"",null);
+        return res;
+    }
+
 
     public ArrayList<MyData> getAllData(){
 
@@ -86,6 +92,21 @@ public class DBHelper extends SQLiteOpenHelper{
         cursor.close();
         return arrayList;
 
+    }
+
+    public ArrayList<String> getAllTitle(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from listdata",null);
+        cursor.moveToFirst();
+
+        while(cursor.isAfterLast() == false){
+            String title = cursor.getString(cursor.getColumnIndex(COL_TITLE));
+            arrayList.add(title);
+        }
+        cursor.close();
+        //db.close();
+        return arrayList;
     }
 
     public void insertData(String title ,String content,String date,String color) {

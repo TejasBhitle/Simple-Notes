@@ -20,8 +20,8 @@
         android:textStyle="bold"
         android:typeface="monospace"
         android:textSize="30dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/splash_icon"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"/>
+        android:layout_marginTop="140dp" />
 
 </RelativeLayout>

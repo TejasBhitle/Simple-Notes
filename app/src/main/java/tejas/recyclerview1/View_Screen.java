@@ -64,8 +64,10 @@ public class View_Screen extends AppCompatActivity{
         toolbar =(Toolbar)findViewById(R.id.viewscreeen_toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+       // getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.svg_clear_white_36px);
+
 
 
         if(isDark){
@@ -122,6 +124,9 @@ public class View_Screen extends AppCompatActivity{
 
         switch(item.getItemId())
         {
+            case android.R.id.home:
+                onBackPressed();
+                break;
             case R.id.viewscreen_delete:
                 ShowDeleteDialog();
                 break;

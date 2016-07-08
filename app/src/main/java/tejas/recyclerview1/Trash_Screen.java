@@ -34,9 +34,6 @@ public class Trash_Screen extends AppCompatActivity {
     public RecyclerView.Adapter Myadapter;
     public RecyclerView.LayoutManager MylayoutManager;
 
-    private DrawerLayout myDrawer;
-    private NavigationView myNavigationDrawer;
-    private ActionBarDrawerToggle mydrawerToggle;
     private Toolbar mytoolbar;
     DBHelper db;
     Delete_DBHelper delete_db;
@@ -47,6 +44,9 @@ public class Trash_Screen extends AppCompatActivity {
     View main_Rela_layout;
     boolean isDark,isGrid,isOldestFirst;
     TextView blank_textview1;
+
+    DrawerLayout drawerLayout;
+    NavigationView nview;
 
 
     @Override
@@ -63,6 +63,14 @@ public class Trash_Screen extends AppCompatActivity {
 
         setContentView(R.layout.mainactivity);
 
+        drawerLayout =(DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawerLayout !=null;
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        nview =(NavigationView)findViewById(R.id.nvView);
+        assert nview != null;
+        nview.setVisibility(View.GONE);
+
 
 
         db= new DBHelper(this);
@@ -71,16 +79,11 @@ public class Trash_Screen extends AppCompatActivity {
         // Set a Toolbar to replace the ActionBar.
         mytoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
-
-        // Setup drawer view
-        myNavigationDrawer = (NavigationView) findViewById(R.id.nvView);// in activity main . also contains list of items
-        setupDrawerContent(myNavigationDrawer);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //for hamburger icon
-        myDrawer =(DrawerLayout)findViewById(R.id.drawer_layout);//drawer_layout in activity_main
-        mydrawerToggle = setupDrawerToggle();
-        myDrawer.addDrawerListener(mydrawerToggle);
+
 
 
         main_Rela_layout = (View)findViewById(R.id.main_rela_layout);
@@ -93,12 +96,6 @@ public class Trash_Screen extends AppCompatActivity {
             isDark = sharedPreferences.getBoolean("isDark",true);
             isOldestFirst = sharedPreferences.getBoolean("isOldestFirst",true);
         }
-        /*if(isDark){
-            blank_textview1.setTextColor(getResources().getColor(R.color.background_light));
-        }
-        else{
-            blank_textview1.setTextColor(getResources().getColor(R.color.background_dark));
-        }*/
 
         fab.setImageResource(R.drawable.svg_delete_forever_white_36px);
         fab.setOnClickListener(
@@ -160,9 +157,8 @@ public class Trash_Screen extends AppCompatActivity {
                     }
 
                     @Override
-                    public boolean onLongPress(View v, int position) {
+                    public void onLongPress(View v, int position) {
                         //do nothing
-                        return true;
                     }
                 })
         );
@@ -201,86 +197,6 @@ public class Trash_Screen extends AppCompatActivity {
     }
 
 
-    //for hamburger icon
-    private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, myDrawer, mytoolbar,R.string.drawer_open,R.string.drawer_close);
-    }
-
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
-
-    public void selectDrawerItem(MenuItem menuItem) {
-
-        //Add your switch Case
-        switch (menuItem.getItemId())
-        {
-            case R.id.menu_LISTS:
-                Intent i = new Intent(Trash_Screen.this,MainActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(Trash_Screen.this);
-                supportFinishAfterTransition();
-                startActivity(i, options.toBundle());
-                break;
-
-            case R.id.menu_ABOUT:
-                Intent intent = new Intent(Trash_Screen.this,About_Screen.class);
-                ActivityOptionsCompat option2 = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(Trash_Screen.this);
-                supportFinishAfterTransition();
-                startActivity(intent, option2.toBundle());
-                break;
-
-            case R.id.menu_TRASH:
-                //Do Nothing
-                break;
-
-            case R.id.menu_SETTINGS:
-                Intent a = new Intent(Trash_Screen.this,SettingsActivity.class);
-                ActivityOptionsCompat option3 = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(Trash_Screen.this);
-                supportFinishAfterTransition();
-                startActivity(a, option3.toBundle());
-                break;
-        }
-        // Highlight the selected item has been done by NavigationView
-        //menuItem.setChecked(true);
-
-        // Set action bar title
-        //setTitle(menuItem.getTitle());
-
-        // Close the navigation drawer
-        myDrawer.closeDrawers();
-    }
-
-
-
-    //To open the drawer
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                myDrawer.openDrawer(GravityCompat.START);
-                return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mydrawerToggle.syncState();
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
@@ -291,8 +207,6 @@ public class Trash_Screen extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 
 
 }

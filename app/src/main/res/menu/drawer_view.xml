@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/menu_LISTS"
-            android:title="LISTS"
-            android:typeface="monospace"
-            android:icon="@drawable/svg_list_white_36px"/>
-        <item
-            android:id="@+id/menu_TRASH"
-            android:title="TRASH"
-            android:typeface="monospace"
-            android:icon="@drawable/svg_delete_forever_white_36px"/>
+
+        <group>
+            <item
+                android:id="@+id/menu_LISTS"
+                android:title="NOTES"
+                android:icon="@drawable/svg_list_white_36px"/>
+            <item
+                android:id="@+id/menu_TRASH"
+                android:title="TRASH"
+                android:icon="@drawable/svg_delete_forever_white_36px"/>
+            <item
+                android:id="@+id/menu_SETTINGS"
+                android:title="SETTINGS"
+                android:icon="@drawable/svg_build_white_36px"/>
+        </group>
         <item
             android:id="@+id/menu_ABOUT"
             android:title="ABOUT"
-            android:typeface="monospace"
-            android:icon="@drawable/svg_info_white_36px"/>
-        <item
-            android:id="@+id/menu_SETTINGS"
-            android:title="SETTINGS"
-            android:typeface="monospace"
-            android:icon="@drawable/svg_settings_white_36px"/>
-    </group>
+            android:icon="@drawable/svg__info_outline_white_24px"/>
+
 
 
 </menu>

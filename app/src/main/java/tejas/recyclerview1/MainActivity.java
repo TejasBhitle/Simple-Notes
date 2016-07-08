@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     View main_Rela_layout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,9 +133,8 @@ public class MainActivity extends AppCompatActivity {
         myrecyclerView.addOnItemTouchListener(
                 new MyRecyclerItemListener(getApplicationContext(), new MyRecyclerItemListener.OnClickItemInterface() {
                     @Override
-                    public boolean onLongPress(View v, int position) {
+                    public void onLongPress(View v, int position) {
                         Toast.makeText(getApplicationContext(),"long press",Toast.LENGTH_SHORT).show();
-                        return true;
                     }
 
                     @Override
@@ -187,17 +187,6 @@ public class MainActivity extends AppCompatActivity {
                 //To open the drawer
                 myDrawer.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.menu_SETTINGS:
-                Intent i = new Intent(MainActivity.this ,SettingsActivity.class);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeSceneTransitionAnimation(MainActivity.this);
-                    startActivity(i, options.toBundle());
-                }
-                else
-                startActivity(i);
-
-                break;
             case R.id.changeListGrid:
                 isGrid = !isGrid;
                 if(isGrid){
@@ -250,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                 //Do Nothing
                 break;
             case R.id.menu_ABOUT:
-                Intent i = new Intent(MainActivity.this ,About_Screen.class);
+                Intent i = new Intent(getApplicationContext() ,About_Screen.class);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     ActivityOptionsCompat options = ActivityOptionsCompat
                             .makeSceneTransitionAnimation(MainActivity.this);
@@ -260,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                 break;
             case R.id.menu_TRASH:
-                Intent intent = new Intent(MainActivity.this,Trash_Screen.class);
+                Intent intent = new Intent(getApplicationContext(),Trash_Screen.class);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     ActivityOptionsCompat options = ActivityOptionsCompat
                             .makeSceneTransitionAnimation(MainActivity.this);
@@ -270,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 break;
             case R.id.menu_SETTINGS:
-                Intent a = new Intent(MainActivity.this,SettingsActivity.class);
+                Intent a = new Intent(getApplicationContext(),SettingsActivity.class);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     ActivityOptionsCompat options = ActivityOptionsCompat
                             .makeSceneTransitionAnimation(MainActivity.this);

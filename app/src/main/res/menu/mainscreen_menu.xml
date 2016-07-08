@@ -3,15 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.toolbar.MainActivity">
-    <item
-        android:id="@+id/menu_SETTINGS"
-        android:icon="@drawable/svg_settings_white_36px"
-        android:title="Settings"
-        app:showAsAction="always"
-        android:orderInCategory="3"
-        android:menuCategory="secondary"
-        />
-
 
     <item android:id="@+id/changeListGrid"
         android:icon="@drawable/svg_view_quilt_white_36px"

@@ -2,7 +2,6 @@ package tejas.recyclerview1;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
@@ -106,13 +105,6 @@ public class Add_Screen extends AppCompatActivity {
                     getWindow().setStatusBarColor(default_color);
                 }
             }
-
-
-
-
-
-
-
 
         fab=(FloatingActionButton)findViewById(R.id.addscreen_fab);
         fab.setOnClickListener(new View.OnClickListener() {

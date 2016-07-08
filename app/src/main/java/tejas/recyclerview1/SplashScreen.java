@@ -10,7 +10,7 @@ public class SplashScreen extends Activity {
     SharedPreferences preferences;
     boolean isDark;
 
-    private static int splash_timer = 2000;
+    private static int splash_timer = 1500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
