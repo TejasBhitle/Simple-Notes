@@ -205,7 +205,7 @@ public class View_Screen extends AppCompatActivity{
 
     public void BuildNotification(String title,String Content){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.drawable.my_app_icon)
+        builder.setSmallIcon(R.drawable.my_photoshop_icon)
                 .setContentTitle(title)
                 .setContentText(Content)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(Content));

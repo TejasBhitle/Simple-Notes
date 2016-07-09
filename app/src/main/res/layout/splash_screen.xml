@@ -5,11 +5,11 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:id="@+id/splash_icon"
         android:elevation="5dp"
-        android:src="@drawable/my_app_icon"
+        android:src="@drawable/my_photoshop_icon"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="165dp" />

@@ -167,7 +167,3 @@ public class About_Screen extends AppCompatActivity {
         dialog.show();
     }
 }
-
-
-
-
