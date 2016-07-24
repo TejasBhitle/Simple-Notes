@@ -1,10 +1,12 @@
 package tejas.recyclerview1;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -21,9 +23,10 @@ public class About_Screen extends AppCompatActivity {
     private Toolbar mytoolbar;
     SharedPreferences sharedPreferences;
     boolean isDark;
-    CardView card1,card2;
+    CardView card1,card2,card3;
     Button github_button,gplus,email_id;
     String TO,SUBJ;
+    View changeLog;
 
 
     @Override
@@ -31,7 +34,7 @@ public class About_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("About");
         sharedPreferences=getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("isDark",true);
+        isDark = sharedPreferences.getBoolean("isDark",false);
 
         if(isDark)
             setTheme(R.style.DarkAppTheme);
@@ -42,8 +45,10 @@ public class About_Screen extends AppCompatActivity {
 
         card1=(CardView)findViewById(R.id.card1);
         card2=(CardView)findViewById(R.id.card2);
+        card3=(CardView)findViewById(R.id.card3);
         github_button =(Button)findViewById(R.id.github_button);
         gplus =(Button)findViewById(R.id.googleplus);
+        changeLog =(View)findViewById(R.id.changeLog);
         email_id =(Button)findViewById(R.id.email_id);
         TO = getResources().getString(R.string.developer_mail);
         SUBJ = getResources().getString(R.string.app_name);
@@ -52,10 +57,12 @@ public class About_Screen extends AppCompatActivity {
         if(isDark){
             card1.setCardBackgroundColor(getResources().getColor(R.color.dark_grey));
             card2.setCardBackgroundColor(getResources().getColor(R.color.dark_grey));
+            card3.setCardBackgroundColor(getResources().getColor(R.color.dark_grey));
         }
         else{
             card1.setCardBackgroundColor(getResources().getColor(R.color.card_light));
             card2.setCardBackgroundColor(getResources().getColor(R.color.card_light));
+            card3.setCardBackgroundColor(getResources().getColor(R.color.card_light));
         }
 
         // Set a Toolbar to replace the ActionBar.
@@ -84,6 +91,28 @@ public class About_Screen extends AppCompatActivity {
                 email(view,TO ,SUBJ,null);
             }
         });
+
+        changeLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showChangeLog(view);
+            }
+        });
+    }
+
+    private void showChangeLog(View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ChangeLog")
+                .setMessage(R.string.changeLog)
+                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialogInterface, int i) {
+                         dialogInterface.dismiss();
+                     }
+                 });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
@@ -138,8 +167,6 @@ public class About_Screen extends AppCompatActivity {
         dialog.setContentView(R.layout.feedback_layout);
 
         final EditText description =(EditText)dialog.findViewById(R.id.feedback_edittext);
-
-
 
         Button send = (Button) dialog.findViewById(R.id.feedback_send);
         send.setOnClickListener(new View.OnClickListener() {

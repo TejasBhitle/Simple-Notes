@@ -1,5 +1,6 @@
 package tejas.recyclerview1;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -20,6 +21,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,23 +31,20 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public RecyclerView myrecyclerView;
-    public RecyclerView.Adapter Myadapter;
-    public RecyclerView.LayoutManager MylayoutManager;
-
+    private RecyclerView myrecyclerView;
+    private RecyclerView.Adapter Myadapter;
+    private RecyclerView.LayoutManager MylayoutManager;
     private DrawerLayout myDrawer;
     private NavigationView myNavigationDrawer;
     private ActionBarDrawerToggle mydrawerToggle;
     private Toolbar mytoolbar;
     DBHelper db;
-
     private boolean backPressedToExitOnce = false;
-    private boolean isOldestFirst,isDark,isGrid;//if true then list view else grid view
+    private boolean isOldestFirst,isDark,isGrid,isPasswordSet,isHidden;
     private Toast toast = null;
-
-    public ArrayList<MyData> main_arrayList;
+    private ArrayList<MyData> main_arrayList;
     MyData data;
-    String id;
+    String id,isLocked,PASSWORD;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     TextView blank_textview1,title;
@@ -58,11 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        isDark = sharedPreferences.getBoolean("isDark",true);
+        isDark = sharedPreferences.getBoolean("isDark",false);
+
+
         if(isDark)
             setTheme(R.style.DarkAppTheme);
         else
             setTheme(R.style.AppTheme);
+        setTitle("NOTES");
 
         setContentView(R.layout.mainactivity);
 
@@ -103,13 +107,29 @@ public class MainActivity extends AppCompatActivity {
         //refreshing themes and looks
         isGrid = sharedPreferences.getBoolean("isGrid",true);
         isOldestFirst = sharedPreferences.getBoolean("isOldestFirst",true);
+        isHidden = sharedPreferences.getBoolean("isHidden",false);
+        PASSWORD = sharedPreferences.getString("PASSWORD","");
 
+
+        if(PASSWORD.matches(""))
+            isPasswordSet=false;
+        else
+           isPasswordSet=true;
 
         //inflating recyclerView
-        if(isOldestFirst)
-            main_arrayList = db.getAllData();
-        else
-            main_arrayList = db.getReversedata();
+        if(isOldestFirst){
+            if(isHidden)
+                main_arrayList= db.getAllExceptLocked();
+            else
+                main_arrayList = db.getAllData();
+        }
+        else{
+            if(isHidden)
+                main_arrayList= db.getReverseExceptLocked();
+            else
+                main_arrayList = db.getReversedata();
+
+        }
 
 
         myrecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
@@ -121,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             MylayoutManager = new LinearLayoutManager(this);
             myrecyclerView.setLayoutManager(MylayoutManager);
         }
-        Myadapter = new CustomAdapter(main_arrayList,getApplicationContext());
+        Myadapter = new CustomAdapter(main_arrayList,getApplicationContext(),isPasswordSet);
         myrecyclerView.setAdapter(Myadapter);
         myrecyclerView.scrollToPosition(0);
 
@@ -142,24 +162,45 @@ public class MainActivity extends AppCompatActivity {
 
                         data = main_arrayList.get(position);
                         id = data.getData_id();
-                        Intent i = new Intent(MainActivity.this,View_Screen.class);
-                        Bundle bundle = new Bundle();
-                        int id = Integer.parseInt(data.getData_id());
-                        bundle.putInt("id",id);
-                        i.putExtras(bundle);
+                        isLocked= data.getData_isLocked();
 
-                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
-                            view.setTransitionName("card");
+                        if(isLocked.matches("true") && isPasswordSet){
+                            final Dialog dialog = new Dialog(MainActivity.this);
+                            dialog.setContentView(R.layout.password_dialog);
+                            dialog.setCanceledOnTouchOutside(false);
+                            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-                            Pair<View,String> p4 = Pair.create(view,"card");
-                            ActivityOptionsCompat options = ActivityOptionsCompat
-                                    .makeSceneTransitionAnimation(MainActivity.this,p4);
-                            startActivity(i, options.toBundle());
+                            final EditText EditText = (EditText)dialog.findViewById(R.id.password_dialog_editText);
+                            final TextView titletext = (TextView)dialog.findViewById(R.id.password_title);
+                            titletext.setText("Password");
+
+                            Button ok = (Button)dialog.findViewById(R.id.password_dialog_ok);
+                            ok.setOnClickListener(
+                                    new View.OnClickListener() {
+                                                       @Override
+                                                       public void onClick(View view) {
+                                                           String entered_data= EditText.getText().toString();
+                                                           if(entered_data.equals(PASSWORD))
+                                                               callViewSceen(view);
+                                                           else
+                                                               Toast.makeText(getApplicationContext(),"Password invalid",Toast.LENGTH_SHORT).show();
+                                                           dialog.cancel();
+                                                       }
+                                                   }
+                            );
+                            Button cancel = (Button)dialog.findViewById(R.id.password_dialog_cancel);
+                            cancel.setOnClickListener(
+                                    new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialog.cancel();
+                                        }
+                                    }
+                            );
+                            dialog.show();
                         }
                         else
-                            startActivity(i);
-                        //overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
-
+                            callViewSceen(view);
                     }
                 })
         );
@@ -248,6 +289,13 @@ public class MainActivity extends AppCompatActivity {
                 else
                     startActivity(i);
                 break;
+            case R.id.menu_LOCKED:
+                if(isPasswordSet)
+                  LockedPressed();
+                else
+                  Toast.makeText(MainActivity.this,"No PinCode Set",Toast.LENGTH_SHORT).show();
+
+                break;
             case R.id.menu_TRASH:
                 Intent intent = new Intent(getApplicationContext(),Trash_Screen.class);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -276,6 +324,59 @@ public class MainActivity extends AppCompatActivity {
         myDrawer.closeDrawers();
     }
 
+    private void LockedPressed() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.password_dialog);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+
+        final EditText enteredText = (EditText)dialog.findViewById(R.id.password_dialog_editText);
+        final TextView title_text = (TextView)dialog.findViewById(R.id.password_title);
+        title_text.setText("PinCode Required");
+
+
+        Button ok = (Button)dialog.findViewById(R.id.password_dialog_ok);
+        ok.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String enteredPassword = enteredText.getText().toString();
+                        if(enteredPassword.matches("")){
+                            Toast.makeText(getApplicationContext(),"No PinCode entered",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            boolean b = password_verify(enteredPassword);
+                            if(b){
+                                callLockedScreen();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"PinCode incorrect",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        onResume();
+                        dialog.dismiss();
+
+                    }
+                }
+        );
+        Button cancel = (Button)dialog.findViewById(R.id.password_dialog_cancel) ;
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+    }
+
+    private boolean password_verify(String string){
+        if(string.equals(PASSWORD))
+            return true;
+        else
+            return false;
+
+    }
 
     public void callAddScreen(View view){
         Intent i = new Intent(MainActivity.this,Add_Screen.class);
@@ -287,6 +388,37 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i, options.toBundle());
         }
         else startActivity(i);
+    }
+
+    public void callViewSceen(View view){
+        Intent i = new Intent(MainActivity.this,View_Screen.class);
+        Bundle bundle = new Bundle();
+        int id = Integer.parseInt(data.getData_id());
+        bundle.putInt("id",id);
+        i.putExtras(bundle);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
+            view.setTransitionName("card");
+
+            Pair<View,String> p4 = Pair.create(view,"card");
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(MainActivity.this,p4);
+            startActivity(i, options.toBundle());
+        }
+        else
+            startActivity(i);
+        //overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
+    }
+
+    public void callLockedScreen(){
+        Intent k = new Intent(getApplicationContext(),Locked_Screen.class);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(MainActivity.this);
+            startActivity(k, options.toBundle());
+        }
+        else
+            startActivity(k);
     }
 
     /*public boolean onKeyDown(int keycode, KeyEvent event) {

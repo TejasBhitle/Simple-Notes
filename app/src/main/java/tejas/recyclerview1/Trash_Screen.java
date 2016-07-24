@@ -30,21 +30,19 @@ import java.util.ArrayList;
 
 public class Trash_Screen extends AppCompatActivity {
 
-    public RecyclerView myrecyclerView;
-    public RecyclerView.Adapter Myadapter;
-    public RecyclerView.LayoutManager MylayoutManager;
-
-    private Toolbar mytoolbar;
+    RecyclerView myrecyclerView;
+    RecyclerView.Adapter Myadapter;
+    RecyclerView.LayoutManager MylayoutManager;
+    Toolbar mytoolbar;
     DBHelper db;
     Delete_DBHelper delete_db;
-    String id;
+    String id,PASSWORD;
     MyData data;
-    public ArrayList<MyData> main_arrayList;
+    ArrayList<MyData> main_arrayList;
     SharedPreferences sharedPreferences;
     View main_Rela_layout;
-    boolean isDark,isGrid,isOldestFirst;
+    boolean isDark,isGrid,isOldestFirst,isPasswordSet;
     TextView blank_textview1;
-
     DrawerLayout drawerLayout;
     NavigationView nview;
 
@@ -54,7 +52,7 @@ public class Trash_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Trash Screen");
         sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("isDark",true);
+        isDark = sharedPreferences.getBoolean("isDark",false);
         if(isDark)
             setTheme(R.style.DarkAppTheme);
         else
@@ -83,19 +81,15 @@ public class Trash_Screen extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
-
-
         main_Rela_layout = (View)findViewById(R.id.main_rela_layout);
         blank_textview1=(TextView)findViewById(R.id.blank_textview1);
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.main_fab);
 
         //refreshing themes and looks
-        if(sharedPreferences != null){
-            isGrid = sharedPreferences.getBoolean("isGrid",true);
-            isDark = sharedPreferences.getBoolean("isDark",true);
-            isOldestFirst = sharedPreferences.getBoolean("isOldestFirst",true);
-        }
+
+        isGrid = sharedPreferences.getBoolean("isGrid",false);
+        isDark = sharedPreferences.getBoolean("isDark",false);
+        isOldestFirst = sharedPreferences.getBoolean("isOldestFirst",false);
 
         fab.setImageResource(R.drawable.svg_delete_forever_white_36px);
         fab.setOnClickListener(
@@ -125,11 +119,18 @@ public class Trash_Screen extends AppCompatActivity {
         );
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
+
+        PASSWORD= sharedPreferences.getString("PASSWORD","");
+
+        if(PASSWORD.matches(""))
+            isPasswordSet=false;
+        else
+            isPasswordSet=true;
+
+
         if(isOldestFirst)
             main_arrayList = delete_db.getAllData();
         else
@@ -139,7 +140,7 @@ public class Trash_Screen extends AppCompatActivity {
         myrecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         MylayoutManager = new LinearLayoutManager(this);
         myrecyclerView.setLayoutManager( new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        Myadapter = new CustomAdapter(main_arrayList,getApplicationContext());
+        Myadapter = new CustomAdapter(main_arrayList,getApplicationContext(),isPasswordSet);
         myrecyclerView.setAdapter(Myadapter);
 
         if(main_arrayList.size()==0)
@@ -163,6 +164,7 @@ public class Trash_Screen extends AppCompatActivity {
                 })
         );
     }
+
     private void ShowRestoreDialog(String id) {
         final int int_id = Integer.parseInt(id);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -179,7 +181,7 @@ public class Trash_Screen extends AppCompatActivity {
                 .setNegativeButton("Restore", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db.insertData(data.getData_Title(),data.getData_Content(),data.getData_date(),data.getData_color());
+                        db.insertData(data.getData_Title(),data.getData_Content(),data.getData_date(),data.getData_color(),data.getData_isLocked());
                         delete_db.deleteData(int_id);
                         onResume();
                         Toast.makeText(getApplicationContext(),"Restored",Toast.LENGTH_SHORT).show();
@@ -195,8 +197,6 @@ public class Trash_Screen extends AppCompatActivity {
         alertDialog.show();
 
     }
-
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)

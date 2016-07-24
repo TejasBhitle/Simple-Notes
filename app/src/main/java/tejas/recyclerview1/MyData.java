@@ -1,19 +1,22 @@
 package tejas.recyclerview1;
 
 public class MyData {
-    public String Data_Title;
-    public String Data_Content;
-    public String Data_id;
-    public String Data_date;
-    public String Data_color;
+    private String Data_Title;
+    private String Data_Content;
+    private String Data_id;
+    private String Data_date;
+    private String Data_color;
+    private String Data_isLocked;
+
 
     //Constructor
-    public MyData(String data_Title, String data_Content,String data_id,String data_date,String data_color) {
+    public MyData(String data_Title, String data_Content,String data_id,String data_date,String data_color,String data_isLocked) {
         Data_Title = data_Title;
         Data_Content = data_Content;
         Data_id = data_id;
         Data_date = data_date;
         Data_color=data_color;
+        Data_isLocked=data_isLocked;
     }
 
     //Getters and Setters
@@ -58,6 +61,7 @@ public class MyData {
         Data_Content = data_Content;
     }
 
-
-
+    public String getData_isLocked() {
+        return Data_isLocked;
+    }
 }

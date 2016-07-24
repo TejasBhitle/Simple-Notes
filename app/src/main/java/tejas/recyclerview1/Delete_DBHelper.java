@@ -18,6 +18,7 @@ public class Delete_DBHelper extends SQLiteOpenHelper{
     public static final String COL_DATE = "date";
     public static final String COL_COLOR = "color";
     public static final String COL_ID = "id";
+    public static final String COL_ISLOCKED = "isLocked";
 
 
     public Delete_DBHelper(Context context) {
@@ -27,7 +28,7 @@ public class Delete_DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table delete_data" +
-                "(id integer primary key ,title text ,content text ,date text,color text )");
+                "(id integer primary key ,title text ,content text ,date text,color text,isLocked text )");
     }
 
     @Override
@@ -57,7 +58,8 @@ public class Delete_DBHelper extends SQLiteOpenHelper{
             String string3 = cursor.getString(cursor.getColumnIndex(COL_ID));
             String string4 = cursor.getString(cursor.getColumnIndex(COL_DATE));
             String string5 = cursor.getString(cursor.getColumnIndex(COL_COLOR));
-            MyData obj = new MyData(string1,string2,string3,string4,string5);
+            String string6 = cursor.getString(cursor.getColumnIndex(COL_ISLOCKED));
+            MyData obj = new MyData(string1,string2,string3,string4,string5,string6);
             arrayList.add(obj);
             cursor.moveToNext();
         }
@@ -80,7 +82,9 @@ public class Delete_DBHelper extends SQLiteOpenHelper{
             String string3 = cursor.getString(cursor.getColumnIndex(COL_ID));
             String string4 = cursor.getString(cursor.getColumnIndex(COL_DATE));
             String string5 = cursor.getString(cursor.getColumnIndex(COL_COLOR));
-            MyData obj = new MyData(string1,string2,string3,string4,string5);
+
+            String string6 = cursor.getString(cursor.getColumnIndex(COL_ISLOCKED));
+            MyData obj = new MyData(string1,string2,string3,string4,string5,string6);
             arrayList.add(obj);
             cursor.moveToPrevious();
         }
@@ -90,7 +94,7 @@ public class Delete_DBHelper extends SQLiteOpenHelper{
     }
 
 
-    public void insertData(String title ,String content,String date,String color) {
+    public void insertData(String title ,String content,String date,String color,String isLocked) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -99,6 +103,7 @@ public class Delete_DBHelper extends SQLiteOpenHelper{
         contentValues.put(COL_CONTENT,content);
         contentValues.put(COL_DATE,date);
         contentValues.put(COL_COLOR,color);
+        contentValues.put(COL_ISLOCKED,isLocked);
         db.insert(TABLE_NAME,null,contentValues);
         db.close();
 

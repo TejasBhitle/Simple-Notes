@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class View_Screen extends AppCompatActivity{
@@ -33,19 +34,22 @@ public class View_Screen extends AppCompatActivity{
     TextView title,content,date;
     Integer id;
     View top_layout,bottom_layout;
-    public String title_string,content_string,date_string,color_string;
+    String title_string,content_string,date_string,color_string,time;
     Toolbar toolbar;
     SharedPreferences preferences;
-    Boolean isDark;
+    Boolean isDark,isLocked_boolean;
+    String isLocked,PASSWORD;
     FloatingActionButton fab;
-
+    Cursor cursor;
+    Menu local_menu;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark= preferences.getBoolean("isDark",true);
+        isDark= preferences.getBoolean("isDark",false);
+        PASSWORD = preferences.getString("PASSWORD","");
         if(isDark){
             setTheme(R.style.DarkAppTheme);
         }
@@ -64,7 +68,6 @@ public class View_Screen extends AppCompatActivity{
         toolbar =(Toolbar)findViewById(R.id.viewscreeen_toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
-       // getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.svg_clear_white_36px);
 
@@ -79,12 +82,14 @@ public class View_Screen extends AppCompatActivity{
         Bundle extras = getIntent().getExtras();
         id = extras.getInt("id");
 
-        Cursor cursor = db.getData(id);
+        cursor = db.getData(id);
         cursor.moveToFirst();
         title_string = cursor.getString(cursor.getColumnIndex(DBHelper.COL_TITLE));
         content_string = cursor.getString(cursor.getColumnIndex(DBHelper.COL_CONTENT));
         date_string = cursor.getString(cursor.getColumnIndex(DBHelper.COL_DATE));
+        time = cursor.getString(cursor.getColumnIndex(DBHelper.COL_DATE));
         color_string= cursor.getString(cursor.getColumnIndex(DBHelper.COL_COLOR));
+        isLocked = cursor.getString(cursor.getColumnIndex(DBHelper.COL_IsLocked));
         cursor.close();
 
         title.setText(title_string);
@@ -107,14 +112,40 @@ public class View_Screen extends AppCompatActivity{
                 }
         );
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        cursor = db.getData(id);
+        cursor.moveToFirst();
+        isLocked = cursor.getString(cursor.getColumnIndex(DBHelper.COL_IsLocked));
+        cursor.close();
+
+        if(isLocked.matches("true")){
+            isLocked_boolean=true;
+        }
+        else{
+            isLocked_boolean=false;
+        }
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        local_menu=menu;
         getMenuInflater().inflate(R.menu.viewscreen_menu,menu);
+
+        MenuItem item = (MenuItem)menu.findItem(R.id.viewscreen_lock);
+        if(isLocked_boolean){
+            //unlock icon
+            item.setIcon(R.drawable.lock_open_white_36px);
+        }
+        else{
+            //lock icon
+            item.setIcon(R.drawable.lock_close_white_36px);
+        }
         return true;
     }
 
@@ -140,8 +171,31 @@ public class View_Screen extends AppCompatActivity{
                 CopyToClipboard(content_string,title_string);
                 Toast.makeText(getApplicationContext(),R.string.clipboard,Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.viewscreen_lock:
+                lockedPressed();
+                break;
         }
         return true;
+    }
+
+    private void lockedPressed() {
+        if(PASSWORD.matches("")){
+            Toast.makeText(getApplicationContext(),"PinCode not set",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            if(isLocked_boolean){
+                isLocked="false";
+                local_menu.findItem(R.id.viewscreen_lock).setIcon(R.drawable.lock_close_white_36px);
+                Toast.makeText(getApplicationContext(),"Unlocked",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                isLocked="true";
+                local_menu.findItem(R.id.viewscreen_lock).setIcon(R.drawable.lock_open_white_36px);
+                Toast.makeText(getApplicationContext(),"Locked",Toast.LENGTH_SHORT).show();
+            }
+            db.updateData(id,title_string,content_string,time,color_string,isLocked);
+            onResume();
+        }
     }
 
     private void CopyToClipboard(String content_string, String title_string) {
@@ -189,7 +243,10 @@ public class View_Screen extends AppCompatActivity{
     }
 
     public void Add_to_Trash(){
-        delete_dbHelper.insertData(title_string,content_string,java.text.DateFormat.getDateTimeInstance().format(new Date()),color_string);
+        Calendar calendar =Calendar.getInstance();
+        time = calendar.getTime().toString().substring(0,16);
+        delete_dbHelper.insertData(title_string,content_string,time,color_string,isLocked);
+
         db.deleteData(id);
        Toast.makeText(View_Screen.this,R.string.trash_move,Toast.LENGTH_SHORT).show();
         supportFinishAfterTransition();
@@ -217,7 +274,6 @@ public class View_Screen extends AppCompatActivity{
         NotificationManager manager =(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         manager.notify(0,builder.build());
     }
-
 
     @Override
     public void onBackPressed() {

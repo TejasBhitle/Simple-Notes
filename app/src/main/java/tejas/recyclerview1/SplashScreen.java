@@ -10,13 +10,13 @@ public class SplashScreen extends Activity {
     SharedPreferences preferences;
     boolean isDark;
 
-    private static int splash_timer = 1500;
+    private static int splash_timer = 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         preferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark=preferences.getBoolean("isDark",true);
+        isDark=preferences.getBoolean("isDark",false);
         if(isDark)
             setTheme(R.style.DarkAppTheme);
         else

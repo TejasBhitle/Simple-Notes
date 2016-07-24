@@ -69,12 +69,8 @@
                     android:layout_marginLeft="@dimen/layout_side_margin"
                     android:gravity="top"
                     android:paddingTop="20dp"
-                    android:paddingBottom="30dp"
-                    />
-
+                    android:paddingBottom="30dp" />
             </ScrollView>
-
-
         </RelativeLayout>
     </RelativeLayout>
 
@@ -87,8 +83,8 @@
         android:elevation="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         />
 
 

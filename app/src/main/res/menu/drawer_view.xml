@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <group>
+        <group
+            android:id="@+id/group1">
             <item
                 android:id="@+id/menu_LISTS"
                 android:title="NOTES"
                 android:icon="@drawable/svg_list_white_36px"/>
+            <item
+                android:id="@+id/menu_LOCKED"
+                android:title="PROTECTED"
+                android:icon="@drawable/lock_close_white_36px"/>
             <item
                 android:id="@+id/menu_TRASH"
                 android:title="TRASH"

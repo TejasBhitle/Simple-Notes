@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Simple Note</string>
+    <string name="app_version">v1.0.2</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -24,6 +25,8 @@
     <string name="clipboard">Copied to clipboard</string>
     <string name="rateppmsg">Thanks but App not on playstore yet.</string>
     <string name="feedback_hint">Your Opinion (Optional)</string>
+    <string name="secured">******************************************</string>
+
 
     <string-array name="my_color_array">
        <item>@color/RED</item>
@@ -32,13 +35,20 @@
         <item>@color/INDIGO</item>
         <item>@color/BLUE</item>
         <item>@color/CYAN</item>
-        .
         <item>@color/TEAL</item>
         <item>@color/GREEN</item>
         <item>@color/YELLOW</item>
         <item>@color/ORANGE</item>
         <item>@color/BROWN</item>
         <item>@color/GREY</item>
-
     </string-array>
+
+    <string name="changeLog">
+        v1.0.2\n
+        Hide Secured Notes added.\n
+        Font style changed\n\n
+        v1.0.1\n
+        PinCode Protection added.\n
+        Miscellaneous Bugs fixed.\n
+    </string>
 </resources>

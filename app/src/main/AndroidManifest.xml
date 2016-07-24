@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="tejas.recyclerview1">
 
     <application
@@ -22,6 +23,9 @@
             android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".View_Screen"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".Locked_Screen"
             android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".Trash_Screen"

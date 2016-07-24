@@ -28,7 +28,7 @@ public class Add_Screen extends AppCompatActivity {
     EditText title_text , content_text;
     public DBHelper mydb ;
     int id;
-    String time_now,pre_color;
+    String time_now,pre_color,pre_isLocked ;
     private Toolbar mytoolbar;
     View top_layout,bottom_layout;
     static int random_color=1 ;
@@ -46,7 +46,7 @@ public class Add_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         preferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark = preferences.getBoolean("isDark",true);
+        isDark = preferences.getBoolean("isDark",false);
         if(isDark)
             setTheme(R.style.DarkAppTheme);
         else
@@ -86,6 +86,7 @@ public class Add_Screen extends AppCompatActivity {
 
                 String pre_title = cursor.getString(cursor.getColumnIndex(DBHelper.COL_TITLE));
                 String pre_content = cursor.getString(cursor.getColumnIndex(DBHelper.COL_CONTENT));
+                pre_isLocked = cursor.getString(cursor.getColumnIndex(DBHelper.COL_IsLocked));
                 pre_color = cursor.getString(cursor.getColumnIndex(DBHelper.COL_COLOR));
 
                 title_text.setText(pre_title);
@@ -97,7 +98,7 @@ public class Add_Screen extends AppCompatActivity {
                 }
                 cursor.close();
             }
-            else{
+            else{// called to add
                 default_color = getRandom(color_array);
                 top_layout.setBackgroundColor(default_color);
                 mytoolbar.setBackgroundColor(default_color);
@@ -150,24 +151,37 @@ public class Add_Screen extends AppCompatActivity {
         InputMethodManager manager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
 
+
         //time_now = java.text.DateFormat.getDateTimeInstance().format(new Date());
         Calendar calendar =Calendar.getInstance();
         time_now = calendar.getTime().toString().substring(0,16);
         String titleEntered = title_text.getText().toString();
         String contentEntered = content_text.getText().toString();
 
+        //if title empty get from substring
+        if(titleEntered.matches("") && !contentEntered.matches("")){
+            //get 2 words from content
+            int length = contentEntered.length();
+            if(length <= 15)
+              titleEntered=contentEntered.substring(0,length);
+            else
+                titleEntered=contentEntered.substring(0,15);
+        }
+
         if(titleEntered.matches("") && contentEntered.matches("")){
             //nothing entered
             Toast.makeText(Add_Screen.this,"Cant Save Empty Note",Toast.LENGTH_SHORT).show();
         }
+
         else{
+
             if(id == -1) {//new data
                 String colorEntered =  String.valueOf(default_color);
-                mydb.insertData(titleEntered, contentEntered, time_now, colorEntered);
+                mydb.insertData(titleEntered, contentEntered, time_now, colorEntered,"false");
             }
             else
             {//update existing
-                mydb.updateData(id,titleEntered,contentEntered,time_now,pre_color);
+                mydb.updateData(id,titleEntered,contentEntered,time_now,pre_color,pre_isLocked);
             }
             Toast.makeText(Add_Screen.this,"Saved",Toast.LENGTH_SHORT).show();
         }
