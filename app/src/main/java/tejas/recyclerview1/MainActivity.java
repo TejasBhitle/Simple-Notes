@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mytoolbar;
     DBHelper db;
     private boolean backPressedToExitOnce = false;
-    private boolean isOldestFirst,isDark,isGrid,isPasswordSet,isHidden;
+    private boolean isOldestFirst,isGrid,isPasswordSet,isHidden;
     private Toast toast = null;
     private ArrayList<MyData> main_arrayList;
     MyData data;
@@ -59,14 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        isDark = sharedPreferences.getBoolean("isDark",false);
-
-
-        if(isDark)
-            setTheme(R.style.DarkAppTheme);
-        else
-            setTheme(R.style.AppTheme);
         setTitle("NOTES");
+        setTitleColor(R.color.amoled_dark_theme_background);
 
         setContentView(R.layout.mainactivity);
 
@@ -77,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
         // Set a Toolbar to replace the ActionBar.
         mytoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
-
-
 
         // Setup drawer view
         myNavigationDrawer = (NavigationView) findViewById(R.id.nvView);//  list of items
@@ -204,6 +198,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
         );
+
+        /*myrecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if(dy>0 )
+                    fab.hide();
+                else
+                    fab.show();
+            }
+        });*/
     }
 
     @Override
@@ -211,10 +215,10 @@ public class MainActivity extends AppCompatActivity {
         local_menu=menu;
         getMenuInflater().inflate(R.menu.mainscreen_menu,menu);
         if(isGrid){
-            local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.svg_view_stream_white_36px);
+            local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.view_stream_white_36px);
         }
         else{
-            local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.svg_view_quilt_white_36px);
+            local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.dashboard_white_36px);
         }
 
         return true;
@@ -231,24 +235,20 @@ public class MainActivity extends AppCompatActivity {
             case R.id.changeListGrid:
                 isGrid = !isGrid;
                 if(isGrid){
-                    local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.svg_view_stream_white_36px);
+                    local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.view_stream_white_36px);
                 }
                 else{
-                    local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.svg_view_quilt_white_36px);
+                    local_menu.findItem(R.id.changeListGrid).setIcon(R.drawable.dashboard_white_36px);
                 }
                 editor.putBoolean("isGrid",isGrid);
                 editor.apply();
                 onResume();
                 break;
-            case R.id.darkMode:
-                isDark =! isDark;
-                editor.putBoolean("isDark",isDark);
-                editor.apply();
-                recreate();
-                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -281,40 +281,21 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_ABOUT:
                 Intent i = new Intent(getApplicationContext() ,About_Screen.class);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeSceneTransitionAnimation(MainActivity.this);
-                    startActivity(i, options.toBundle());
-                }
-                else
-                    startActivity(i);
+                startActivity(i);
                 break;
             case R.id.menu_LOCKED:
                 if(isPasswordSet)
                   LockedPressed();
                 else
                   Toast.makeText(MainActivity.this,"No PinCode Set",Toast.LENGTH_SHORT).show();
-
                 break;
             case R.id.menu_TRASH:
                 Intent intent = new Intent(getApplicationContext(),Trash_Screen.class);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeSceneTransitionAnimation(MainActivity.this);
-                    startActivity(intent, options.toBundle());
-                }
-                else
-                    startActivity(intent);
+                startActivity(intent);
                 break;
             case R.id.menu_SETTINGS:
                 Intent a = new Intent(getApplicationContext(),SettingsActivity.class);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeSceneTransitionAnimation(MainActivity.this);
-                    startActivity(a, options.toBundle());
-                }
-                else
-                    startActivity(a);
+                startActivity(a);
                 break;
         }
 
@@ -380,14 +361,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void callAddScreen(View view){
         Intent i = new Intent(MainActivity.this,Add_Screen.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            Pair<View,String> p1 = Pair.create((View)fab,"trans_add_fab");
-            ActivityOptionsCompat options = ActivityOptionsCompat.
-                    makeSceneTransitionAnimation(MainActivity.this,p1);
-            startActivity(i, options.toBundle());
-        }
-        else startActivity(i);
+        startActivity(i);
     }
 
     public void callViewSceen(View view){
@@ -398,16 +372,17 @@ public class MainActivity extends AppCompatActivity {
         i.putExtras(bundle);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
-            view.setTransitionName("card");
-
-            Pair<View,String> p4 = Pair.create(view,"card");
+            Pair<View,String> p2 = Pair.create((View)fab,"fab");
             ActivityOptionsCompat options = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(MainActivity.this,p4);
+                    .makeSceneTransitionAnimation(MainActivity.this,p2);
             startActivity(i, options.toBundle());
         }
         else
+        {
             startActivity(i);
-        //overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
+            overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
+        }
+
     }
 
     public void callLockedScreen(){
@@ -420,13 +395,6 @@ public class MainActivity extends AppCompatActivity {
         else
             startActivity(k);
     }
-
-    /*public boolean onKeyDown(int keycode, KeyEvent event) {
-        if (keycode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(true);
-        }
-        return super.onKeyDown(keycode, event);
-    }*/
 
     @Override
     public void onBackPressed() {
@@ -475,5 +443,13 @@ public class MainActivity extends AppCompatActivity {
             this.toast.cancel();
         super.onPause();
     }
+
+        /*public boolean onKeyDown(int keycode, KeyEvent event) {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true);
+        }
+        return super.onKeyDown(keycode, event);
+    }*/
+
 
 }

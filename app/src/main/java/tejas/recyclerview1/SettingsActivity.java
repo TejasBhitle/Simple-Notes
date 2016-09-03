@@ -3,6 +3,7 @@ package tejas.recyclerview1;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -26,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity{
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     CardView card1,card2,card3;
-    Boolean isOldestFirst,isDark,isPasswordSet,isHidden;
+    Boolean isOldestFirst,isPasswordSet,isHidden;
     String PASSWORD;
     TextView ChangePassword_textview;
     DBHelper db;
@@ -39,17 +40,17 @@ public class SettingsActivity extends AppCompatActivity{
 
         sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        isDark= sharedPreferences.getBoolean("isDark",false);
         isHidden =sharedPreferences.getBoolean("isHidden",false);
         isOldestFirst= sharedPreferences.getBoolean("isOldestFirst",false);
         PASSWORD=sharedPreferences.getString("PASSWORD","");
 
         db = new DBHelper(this);
 
-        if(isDark)
-            setTheme(R.style.DarkAppTheme);
-        else
-            setTheme(R.style.AppTheme);
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.dark_primaryDark));
+        }
+
+
 
         setContentView(R.layout.setting_activity);
 
@@ -108,6 +109,11 @@ public class SettingsActivity extends AppCompatActivity{
                 ResetAllDialog();
             }
         });
+
+
+        card1.setCardBackgroundColor(getResources().getColor(R.color.dark_theme_background));
+        card2.setCardBackgroundColor(getResources().getColor(R.color.dark_theme_background));
+        card3.setCardBackgroundColor(getResources().getColor(R.color.dark_theme_background));
     }
 
     @Override
@@ -141,18 +147,6 @@ public class SettingsActivity extends AppCompatActivity{
             HideSwitch.setChecked(false);
 
 
-        if(isDark){
-            //settings_layout.setBackgroundColor(getResources().getColor(R.color.background_dark));
-            card1.setCardBackgroundColor(getResources().getColor(R.color.dark_theme_background));
-            card2.setCardBackgroundColor(getResources().getColor(R.color.dark_theme_background));
-            card3.setCardBackgroundColor(getResources().getColor(R.color.dark_theme_background));
-        }
-        else{
-            card1.setCardBackgroundColor(getResources().getColor(R.color.light_theme_background));
-            card2.setCardBackgroundColor(getResources().getColor(R.color.light_theme_background));
-            card3.setCardBackgroundColor(getResources().getColor(R.color.light_theme_background));
-
-        }
     }
 
     private boolean password_verify(String string){

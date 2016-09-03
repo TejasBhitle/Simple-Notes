@@ -4,37 +4,34 @@
     <item
         android:title="Delete"
         android:id="@+id/viewscreen_delete"
-        android:icon="@drawable/svg_delete_white_36px"
+        android:icon="@drawable/delete_black_36px"
         app:showAsAction="always"
-        android:orderInCategory="5"
+        android:orderInCategory="3"
         android:menuCategory="secondary" />
     <item
         android:title="Share"
         android:id="@+id/viewscreen_share"
-        android:icon="@drawable/svg_share_white_36px"
-        app:showAsAction="always"
-        android:orderInCategory="4"
-        android:menuCategory="secondary"/>
-    <item
-        android:title="Notify"
-        android:id="@+id/viewscreen_notify"
-        android:icon="@drawable/svg_notifications_active_white_36px"
-        app:showAsAction="always"
-        android:orderInCategory="3"
-        android:menuCategory="secondary"/>
-    <item
-        android:title="Clipboard"
-        android:id="@+id/viewscreen_clipboard"
-        android:icon="@drawable/ic_content_copy_white_36px"
+        android:icon="@drawable/share_black_36px"
         app:showAsAction="always"
         android:orderInCategory="2"
         android:menuCategory="secondary"/>
-
     <item
         android:title="Lock"
         android:id="@+id/viewscreen_lock"
-        android:icon="@drawable/lock_close_white_36px"
+        android:icon="@drawable/lock_open_black_36px"
         app:showAsAction="always"
         android:orderInCategory="1"
         android:menuCategory="secondary"/>
+
+    <item
+        android:title="Pin as Notification"
+        android:id="@+id/viewscreen_notify"
+        />
+    <item
+        android:title="Copy To Clipboard"
+        android:id="@+id/viewscreen_clipboard"
+        />
+    <item
+        android:title="Read Content Aloud"
+        android:id="@+id/viewscreen_speak"/>
 </menu>

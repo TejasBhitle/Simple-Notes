@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class About_Screen extends AppCompatActivity {
 
     private Toolbar mytoolbar;
     SharedPreferences sharedPreferences;
-    boolean isDark;
     CardView card1,card2,card3;
-    Button github_button,gplus,email_id;
+    Button github_button,gplus,email_id,linkedIn;
     String TO,SUBJ;
     View changeLog;
 
@@ -34,13 +33,12 @@ public class About_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("About");
         sharedPreferences=getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("isDark",false);
 
-        if(isDark)
-            setTheme(R.style.DarkAppTheme);
-        else
-            setTheme(R.style.AppTheme);
         setContentView(R.layout.about_screen);
+
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.dark_primaryDark));
+        }
 
 
         card1=(CardView)findViewById(R.id.card1);
@@ -50,20 +48,14 @@ public class About_Screen extends AppCompatActivity {
         gplus =(Button)findViewById(R.id.googleplus);
         changeLog =(View)findViewById(R.id.changeLog);
         email_id =(Button)findViewById(R.id.email_id);
+        linkedIn =(Button)findViewById(R.id.linkedin);
+
         TO = getResources().getString(R.string.developer_mail);
         SUBJ = getResources().getString(R.string.app_name);
 
 
-        if(isDark){
-            card1.setCardBackgroundColor(getResources().getColor(R.color.dark_grey));
-            card2.setCardBackgroundColor(getResources().getColor(R.color.dark_grey));
-            card3.setCardBackgroundColor(getResources().getColor(R.color.dark_grey));
-        }
-        else{
-            card1.setCardBackgroundColor(getResources().getColor(R.color.card_light));
-            card2.setCardBackgroundColor(getResources().getColor(R.color.card_light));
-            card3.setCardBackgroundColor(getResources().getColor(R.color.card_light));
-        }
+
+
 
         // Set a Toolbar to replace the ActionBar.
         mytoolbar = (Toolbar) findViewById(R.id.about_toolbar);
@@ -82,6 +74,13 @@ public class About_Screen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 link(view,1);
+            }
+        });
+
+        linkedIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                link(view,2);
             }
         });
 
@@ -113,6 +112,7 @@ public class About_Screen extends AppCompatActivity {
                  });
         AlertDialog dialog = builder.create();
         dialog.show();
+        dialog.getWindow().setLayout(1000,1500);
     }
 
 
@@ -127,8 +127,11 @@ public class About_Screen extends AppCompatActivity {
         if(choose == 1){
             uri =Uri.parse(getResources().getString(R.string.github_link));
         }
-        else {
+        else if(choose == 0) {
             uri = Uri.parse(getResources().getString(R.string.gplus_link));
+        }
+        else {
+            uri = Uri.parse(getResources().getString(R.string.linkedIn_link));
         }
 
         Intent intent = new Intent(Intent.ACTION_VIEW,uri);

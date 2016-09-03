@@ -19,14 +19,10 @@ public class MyRecyclerItemListener implements RecyclerView.OnItemTouchListener 
     GestureDetector gestureDetector;
 
     @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-    }
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
 
     @Override
-    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-    }
+    public void onTouchEvent(RecyclerView rv, MotionEvent e) {}
 
 
     @Override

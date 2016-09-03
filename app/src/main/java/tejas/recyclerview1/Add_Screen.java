@@ -30,15 +30,12 @@ public class Add_Screen extends AppCompatActivity {
     int id;
     String time_now,pre_color,pre_isLocked ;
     private Toolbar mytoolbar;
-    View top_layout,bottom_layout;
+    View addscreen;
     static int random_color=1 ;
     private int default_color;
     int[] color_array;
     Bundle bundle;
     SharedPreferences preferences;
-    FloatingActionButton fab;
-
-    boolean isDark;
 
 
     @Override
@@ -46,26 +43,20 @@ public class Add_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         preferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark = preferences.getBoolean("isDark",false);
-        if(isDark)
-            setTheme(R.style.DarkAppTheme);
-        else
-            setTheme(R.style.AppTheme);
 
-        setContentView(R.layout.new_addscreen);
+
+        setContentView(R.layout.addscreen);
 
         mydb = new DBHelper(this);
 
         title_text=(EditText)findViewById(R.id.addscreen_text1);
         content_text=(EditText)findViewById(R.id.addscreen_text2);
 
-        top_layout=(View)findViewById(R.id.addScreen_toplayout);
-        bottom_layout=(View)findViewById(R.id.addscreen_bottomlayout);
+        addscreen=(View)findViewById(R.id.addscreen);
+
         color_array=getResources().getIntArray(R.array.my_color_array);
 
-        if(isDark){
-            bottom_layout.setBackgroundColor(getResources().getColor(R.color.dark_theme_background));
-        }
+
 
         // Set a Toolbar to replace the ActionBar.
         mytoolbar = (Toolbar) findViewById(R.id.addscreeen_toolbar);
@@ -73,6 +64,7 @@ public class Add_Screen extends AppCompatActivity {
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_done_black_36px);
 
 
 
@@ -91,7 +83,7 @@ public class Add_Screen extends AppCompatActivity {
 
                 title_text.setText(pre_title);
                 content_text.setText(pre_content);
-                top_layout.setBackgroundColor(Integer.parseInt(pre_color));
+                addscreen.setBackgroundColor(Integer.parseInt(pre_color));
                 mytoolbar.setBackgroundColor(Integer.parseInt(pre_color));
                 if(Build.VERSION.SDK_INT >= 21){
                     getWindow().setStatusBarColor(Integer.parseInt(pre_color));
@@ -100,24 +92,12 @@ public class Add_Screen extends AppCompatActivity {
             }
             else{// called to add
                 default_color = getRandom(color_array);
-                top_layout.setBackgroundColor(default_color);
+                addscreen.setBackgroundColor(default_color);
                 mytoolbar.setBackgroundColor(default_color);
                 if(Build.VERSION.SDK_INT >= 21){
                     getWindow().setStatusBarColor(default_color);
                 }
             }
-
-        fab=(FloatingActionButton)findViewById(R.id.addscreen_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bundle == null){
-                    Add_data(-1);//new data
-                }
-                else
-                    Add_data(id);//update existing
-            }
-        });
 
     }
 
@@ -141,6 +121,13 @@ public class Add_Screen extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.pick_color:
                 ColorButtonPressed();
+                break;
+            case android.R.id.home:
+                if(bundle == null){
+                    Add_data(-1);//new data
+                }
+                else
+                    Add_data(id);//update existing
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -209,7 +196,7 @@ public class Add_Screen extends AppCompatActivity {
                     public void onColorSelected(int color) {
                         default_color=color;
                         pre_color=String.valueOf(color);
-                        top_layout.setBackgroundColor(color);
+                        addscreen.setBackgroundColor(color);
                         mytoolbar.setBackgroundColor(color);
                         if(Build.VERSION.SDK_INT >= 21){
                             getWindow().setStatusBarColor(color);

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Simple Note</string>
-    <string name="app_version">v1.0.2</string>
+    <string name="app_version">v2.0.1</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -11,9 +11,11 @@
 
 
     <string name="about_app">A Material Design App with Colorful Notes.</string>
-    <string name="developer_name">Tejas Bhitle</string>
+    <string name="about_me">Amateur Developer who loves to code. </string>
+    <string name="developer_name">Tejas Bhitle\n\nS.P.I.T. CSE Undergrad</string>
     <string name="developer_mail">bhitletejas@gmail.com</string>
     <string name="github_link">https://github.com/TejasBhitle/Simple-Notes.git</string>
+    <string name="linkedIn_link">https://www.linkedin.com/in/tejas-bhitle-ab6597126</string>
     <string name="gplus_link">https://plus.google.com/116889615357123798600</string>
     <string name="NoClientFound">No email client found</string>
 
@@ -44,10 +46,20 @@
     </string-array>
 
     <string name="changeLog">
-        v1.0.2\n
+        v2.0.1\n
+        UI improved\n
+        theme bugs resolved\n\n
+        v1.6.3\n
+        Small Bugs Fixed\n\n
+        v1.6.2\n
+        Major Bugs Fixed.\n\n
+        v1.5.3\n
+        Speak Content added.\n
+        UI improved.\n\n
+        v1.4.6\n
         Hide Secured Notes added.\n
-        Font style changed\n\n
-        v1.0.1\n
+        Font style changed.\n\n
+        v1.4.1\n
         PinCode Protection added.\n
         Miscellaneous Bugs fixed.\n
     </string>

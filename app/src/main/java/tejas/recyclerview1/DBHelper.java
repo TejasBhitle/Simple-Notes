@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DBHelper extends SQLiteOpenHelper{
 
@@ -28,7 +27,10 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table listdata" +
-                "(id integer primary key ,title text ,content text ,date text,color text, isLocked text )");
+                "(id integer primary key ," +
+                "title text ,content text ," +
+                "date text,color text," +
+                " isLocked text )");
     }
 
     @Override
@@ -215,7 +217,8 @@ public class DBHelper extends SQLiteOpenHelper{
         return arrayList;
     }
 
-    public void insertData(String title ,String content,String date,String color,String isLocked) {
+    public void insertData(String title ,String content,
+                           String date,String color,String isLocked) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -245,15 +248,14 @@ public class DBHelper extends SQLiteOpenHelper{
         return true;
     }
 
-    public void deleteData (Integer id)
-    {
+    public void deleteData (Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME,COL_ID + " = ?",new String[]{String.valueOf(id)});
         db.close();
 
     }
-    public void deleteAll()
-    {
+
+    public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME,null,null);
 

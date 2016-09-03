@@ -1,26 +1,18 @@
 package tejas.recyclerview1;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +33,7 @@ public class Trash_Screen extends AppCompatActivity {
     ArrayList<MyData> main_arrayList;
     SharedPreferences sharedPreferences;
     View main_Rela_layout;
-    boolean isDark,isGrid,isOldestFirst,isPasswordSet;
+    boolean isGrid,isOldestFirst,isPasswordSet;
     TextView blank_textview1;
     DrawerLayout drawerLayout;
     NavigationView nview;
@@ -51,13 +43,6 @@ public class Trash_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Trash Screen");
-        sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("isDark",false);
-        if(isDark)
-            setTheme(R.style.DarkAppTheme);
-        else
-            setTheme(R.style.AppTheme);
-
 
         setContentView(R.layout.mainactivity);
 
@@ -74,6 +59,8 @@ public class Trash_Screen extends AppCompatActivity {
         db= new DBHelper(this);
         delete_db = new Delete_DBHelper(this);
 
+        sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
+
         // Set a Toolbar to replace the ActionBar.
         mytoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
@@ -88,7 +75,6 @@ public class Trash_Screen extends AppCompatActivity {
         //refreshing themes and looks
 
         isGrid = sharedPreferences.getBoolean("isGrid",false);
-        isDark = sharedPreferences.getBoolean("isDark",false);
         isOldestFirst = sharedPreferences.getBoolean("isOldestFirst",false);
 
         fab.setImageResource(R.drawable.svg_delete_forever_white_36px);

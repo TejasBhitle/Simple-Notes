@@ -4,4 +4,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="layout_side_margin">20dp</dimen>
     <dimen name="layout_top_margin">20dp</dimen>
+
+    <dimen name="card_elevation">5dp</dimen>
+
+    <!--Settings Screen Dimensions -->
+    <dimen name="label_text_size">18sp</dimen>
+    <dimen name="pref_item_Text_size">16sp</dimen>
+    <dimen name="vertical_spacing">10sp</dimen>
 </resources>

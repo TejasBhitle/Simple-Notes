@@ -5,11 +5,11 @@
             <item
                 android:id="@+id/menu_LISTS"
                 android:title="NOTES"
-                android:icon="@drawable/svg_list_white_36px"/>
+                android:icon="@drawable/note_black_36px"/>
             <item
                 android:id="@+id/menu_LOCKED"
                 android:title="PROTECTED"
-                android:icon="@drawable/lock_close_white_36px"/>
+                android:icon="@drawable/lock_black_closed_36px"/>
             <item
                 android:id="@+id/menu_TRASH"
                 android:title="TRASH"

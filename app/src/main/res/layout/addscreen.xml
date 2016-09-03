@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addscreeen_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/addscreen"
+        android:layout_below="@id/addscreeen_toolbar">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/addscreen_text1"
+                    android:transitionName="transTitle"
+                    android:hint="Note Title"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="top"
+                    android:paddingTop="25dp"
+                    android:layout_marginLeft="@dimen/layout_side_margin"
+                    android:layout_marginRight="@dimen/layout_side_margin"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/transparent" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="What's in your mind?"
+                    android:id="@+id/addscreen_text2"
+                    android:layout_below="@id/addscreen_text1"
+                    android:transitionName="transContent"
+                    android:textColor="#000000"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="@dimen/layout_side_margin"
+                    android:layout_marginLeft="@dimen/layout_side_margin"
+                    android:gravity="top"
+                    android:paddingBottom="30dp"
+                    android:background="@android:color/transparent"/>
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

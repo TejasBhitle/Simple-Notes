@@ -35,7 +35,7 @@ public class Locked_Screen  extends AppCompatActivity{
     ArrayList<MyData> main_arrayList;
     SharedPreferences sharedPreferences;
     View main_Rela_layout;
-    boolean isDark,isGrid,isOldestFirst;
+    boolean isGrid,isOldestFirst;
     TextView blank_textview1;
     DrawerLayout drawerLayout;
     NavigationView nview;
@@ -47,12 +47,6 @@ public class Locked_Screen  extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("isDark",false);
-        if(isDark)
-            setTheme(R.style.DarkAppTheme);
-        else
-            setTheme(R.style.AppTheme);
-
 
         setTitle("Protected Notes");
         setContentView(R.layout.mainactivity);

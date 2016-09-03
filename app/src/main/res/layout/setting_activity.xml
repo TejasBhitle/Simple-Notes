@@ -23,52 +23,54 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Sorting"
-                    android:id="@+id/view1"
-
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#F28e13"/>
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@+id/view1"
+                    android:layout_height="wrap_content"
                     android:id="@+id/card1"
-                    android:elevation="5dp">
+                    android:elevation="@dimen/card_elevation">
                     <LinearLayout
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingBottom="5dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/label_text_size"
+                            android:text="Sorting"
+                            android:id="@+id/view1"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="10dp"
+                            android:textColor="#F28e13"/>
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:id="@+id/layout1">
-
+                            android:layout_height="wrap_content"
+                            android:id="@+id/layout1"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp">
                             <Switch
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="20dp"
+                                android:textSize="@dimen/pref_item_Text_size"
                                 android:id="@+id/SortSwitch"
                                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:text="Oldest First"
                                 android:layout_marginTop="10dp"/>
+
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:layout_below="@id/layout1">
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/layout1"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp">
+
                             <Switch
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/HideSwitch"
-                                android:textSize="20dp"
+                                android:textSize="@dimen/pref_item_Text_size"
                                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:text="Hide Secured Notes"/>
@@ -78,28 +80,30 @@
 
                 </android.support.v7.widget.CardView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Security"
-                    android:id="@+id/view2"
-                    android:layout_marginTop="15dp"
-                    android:layout_below="@id/card1"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#F28e13"/>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@+id/view2"
+                    android:layout_marginTop="1dp"
+                    android:layout_below="@+id/card1"
                     android:id="@+id/card2"
-                    android:elevation="5dp">
+                    android:elevation="@dimen/card_elevation">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingBottom="5dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/label_text_size"
+                            android:text="Security"
+                            android:id="@+id/view2"
+                            android:layout_marginTop="15dp"
+                            android:layout_below="@id/card1"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="#F28e13"/>
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -113,7 +117,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Enable PinCode"
                                 android:id="@+id/password_switch"
-                                android:textSize="20dp"/>
+                                android:textSize="@dimen/pref_item_Text_size"/>
 
                         </RelativeLayout>
                         <RelativeLayout
@@ -122,56 +126,67 @@
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:paddingTop="8dp"
                             android:paddingBottom="8dp">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/changePassword"
                                 android:text="Change PinCode"
-                                android:textSize="20dp"
-                                />
+                                android:textSize="@dimen/pref_item_Text_size" />
+
                         </RelativeLayout>
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
 
-                <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Reset"
-                android:id="@+id/view3"
-                android:layout_below="@id/card2"
-                android:textSize="20dp"
-                android:textColor="#F28e13"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/card3"
                     android:padding="5dp"
-                    android:layout_below="@id/view3"
-                    android:layout_marginTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_below="@id/card2"
+                    android:layout_marginTop="1dp"
                     android:layout_marginBottom="5dp"
-                    android:elevation="5dp">
+                    android:elevation="@dimen/card_elevation">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Reset All"
-                        android:id="@+id/resetAll"
-                        android:textSize="20dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginTop="10dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="All notes will be deleted forever."
-                        android:id="@+id/resettext"
-                        android:textSize="15dp"
-                        android:layout_marginTop="35dp"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Reset"
+                            android:id="@+id/view3"
+                            android:layout_below="@id/card2"
+                            android:textSize="@dimen/label_text_size"
+                            android:textColor="#F28e13"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reset All"
+                            android:id="@+id/resetAll"
+                            android:textSize="@dimen/pref_item_Text_size"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="All notes will be deleted forever."
+                            android:id="@+id/resettext"
+                            android:textSize="@dimen/pref_item_Text_size"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="@dimen/vertical_spacing"
+                            android:layout_marginBottom="@dimen/vertical_spacing"/>
+
+                    </LinearLayout>
+
 
                 </android.support.v7.widget.CardView>
 

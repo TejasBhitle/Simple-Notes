@@ -8,9 +8,10 @@
         <item name="colorAccent">@color/light_colorAccent</item>
         <item name="android:windowBackground">@color/light_theme_background</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:toolbarStyle">@style/ToolbarLight</item>
         <item name="android:typeface">serif</item>
 
-    </style>8c0707
+    </style>
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/dark_primary</item>
@@ -18,8 +19,31 @@
         <item name="colorAccent">@color/dark_colorAccent</item>
         <item name="android:windowBackground">@color/dark_theme_background</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:toolbarStyle">@style/ToolbarDark</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:typeface">serif</item>
     </style>
+
+    <style name="AmoledDarkAppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryDark">@color/dark_primaryDark</item>
+        <item name="colorAccent">@color/dark_colorAccent</item>
+        <item name="android:windowBackground">@color/amoled_dark_theme_background</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:toolbarStyle">@style/ToolbarDark</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <!--ToolbarStyle -->
+    <style name="ToolbarDark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+    <style name="ToolbarLight" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+
+
 
 
 </resources>

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -18,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,18 +28,21 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
-public class View_Screen extends AppCompatActivity{
+public class View_Screen extends AppCompatActivity
+implements TextToSpeech.OnInitListener{
 
     private DBHelper db;
     private Delete_DBHelper delete_dbHelper;
+    private TextToSpeech tts;
     TextView title,content,date;
     Integer id;
-    View top_layout,bottom_layout;
+    View viewscreen;
     String title_string,content_string,date_string,color_string,time;
     Toolbar toolbar;
     SharedPreferences preferences;
-    Boolean isDark,isLocked_boolean;
+    Boolean isLocked_boolean, isSpeechOn;
     String isLocked,PASSWORD;
     FloatingActionButton fab;
     Cursor cursor;
@@ -48,34 +53,25 @@ public class View_Screen extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences = getSharedPreferences("prefs",MODE_PRIVATE);
-        isDark= preferences.getBoolean("isDark",false);
         PASSWORD = preferences.getString("PASSWORD","");
-        if(isDark){
-            setTheme(R.style.DarkAppTheme);
-        }
-        else
-            setTheme(R.style.AppTheme);
 
-        setContentView(R.layout.new_viewscreen);
+        setContentView(R.layout.viewscreen);
 
 
         title =(TextView)findViewById(R.id.viewScreen_title);
         content=(TextView)findViewById(R.id.viewScreen_content);
         date= (TextView)findViewById(R.id.viewScreen_date);
-        bottom_layout=(View)findViewById(R.id.viewscreen_bottom_layout);
-        top_layout=(View)findViewById(R.id.viewScreen_toplayout);
+        viewscreen =(View)findViewById(R.id.viewscreeen);
+
+        tts = new TextToSpeech(this,this);
+        isSpeechOn=false;
 
         toolbar =(Toolbar)findViewById(R.id.viewscreeen_toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.svg_clear_white_36px);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.clear_black_36px);
 
-
-
-        if(isDark){
-            bottom_layout.setBackgroundColor(getResources().getColor(R.color.dark_theme_background));
-        }
 
         db = new DBHelper(this);
         delete_dbHelper= new Delete_DBHelper(this);
@@ -96,7 +92,9 @@ public class View_Screen extends AppCompatActivity{
         content.setText(content_string);
         date.setText(date_string);
         toolbar.setBackgroundColor(Integer.parseInt(color_string));
-        top_layout.setBackgroundColor(Integer.parseInt(color_string));
+        viewscreen.setBackgroundColor(Integer.parseInt(color_string));
+
+
 
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(Integer.parseInt(color_string));
@@ -107,7 +105,13 @@ public class View_Screen extends AppCompatActivity{
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        edit_pressed();
+                        if(isSpeechOn){
+                            tts.stop();
+                            fab.setImageResource(R.drawable.create_black_36px);
+                            isSpeechOn=false;
+                        }
+                        else
+                          edit_pressed();
                     }
                 }
         );
@@ -130,6 +134,7 @@ public class View_Screen extends AppCompatActivity{
             isLocked_boolean=false;
         }
 
+
     }
 
     @Override
@@ -140,11 +145,11 @@ public class View_Screen extends AppCompatActivity{
         MenuItem item = (MenuItem)menu.findItem(R.id.viewscreen_lock);
         if(isLocked_boolean){
             //unlock icon
-            item.setIcon(R.drawable.lock_open_white_36px);
+            item.setIcon(R.drawable.lock_open_black_36px);
         }
         else{
             //lock icon
-            item.setIcon(R.drawable.lock_close_white_36px);
+            item.setIcon(R.drawable.lock_black_closed_36px);
         }
         return true;
     }
@@ -174,8 +179,43 @@ public class View_Screen extends AppCompatActivity{
             case R.id.viewscreen_lock:
                 lockedPressed();
                 break;
+            case R.id.viewscreen_speak:
+                speak(content.getText().toString());
+                break;
         }
         return true;
+    }
+
+    private void speak(String speaktext) {
+
+        isSpeechOn=true;
+        tts.speak(speaktext,TextToSpeech.QUEUE_FLUSH,null);
+        fab.setImageResource(R.drawable.ic_stop_white_36px);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(tts != null){
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onInit(int status) {
+
+        if(status == TextToSpeech.SUCCESS){
+            int result = tts.setLanguage(Locale.ENGLISH);
+            tts.setSpeechRate((float)0.8);
+            if(result == TextToSpeech.LANG_MISSING_DATA ||
+                    result == TextToSpeech.LANG_NOT_SUPPORTED){
+                Log.e("TTS","This language is Not Supported");
+            }
+
+        }else
+            Log.e("TTS","Intialization Failed");
     }
 
     private void lockedPressed() {
@@ -185,12 +225,12 @@ public class View_Screen extends AppCompatActivity{
         else{
             if(isLocked_boolean){
                 isLocked="false";
-                local_menu.findItem(R.id.viewscreen_lock).setIcon(R.drawable.lock_close_white_36px);
+                local_menu.findItem(R.id.viewscreen_lock).setIcon(R.drawable.lock_black_closed_36px);
                 Toast.makeText(getApplicationContext(),"Unlocked",Toast.LENGTH_SHORT).show();
             }
             else{
                 isLocked="true";
-                local_menu.findItem(R.id.viewscreen_lock).setIcon(R.drawable.lock_open_white_36px);
+                local_menu.findItem(R.id.viewscreen_lock).setIcon(R.drawable.lock_open_black_36px);
                 Toast.makeText(getApplicationContext(),"Locked",Toast.LENGTH_SHORT).show();
             }
             db.updateData(id,title_string,content_string,time,color_string,isLocked);
@@ -213,7 +253,7 @@ public class View_Screen extends AppCompatActivity{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {
             Pair< View,String> p1 = Pair.create((View)fab,"trans_add_fab");
             ActivityOptionsCompat options = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(View_Screen.this,p1);
+                    .makeSceneTransitionAnimation(View_Screen.this);
             finish();
             startActivity(i, options.toBundle());
         }

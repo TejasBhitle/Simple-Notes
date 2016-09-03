@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/deleteall"
-        android:icon="@drawable/svg_delete_white_36px"
+        android:icon="@drawable/delete_black_36px"
         android:title="deleteAll"
         app:showAsAction="always" />
 
