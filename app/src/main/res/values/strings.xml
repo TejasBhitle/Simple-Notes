@@ -11,8 +11,8 @@
 
 
     <string name="about_app">A Material Design App with Colorful Notes.</string>
-    <string name="about_me">Amateur Developer who loves to code. </string>
-    <string name="developer_name">Tejas Bhitle\n\nS.P.I.T. CSE Undergrad</string>
+    <string name="about_me">S.P.I.T. CSE Undergrad\nAmateur Developer who loves to code. </string>
+    <string name="developer_name">Tejas Bhitle</string>
     <string name="developer_mail">bhitletejas@gmail.com</string>
     <string name="github_link">https://github.com/TejasBhitle/Simple-Notes.git</string>
     <string name="linkedIn_link">https://www.linkedin.com/in/tejas-bhitle-ab6597126</string>

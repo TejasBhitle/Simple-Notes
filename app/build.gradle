@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.0.+'
     compile 'com.android.support:design:23.1.1'
     compile 'org.xdty.preference:color-picker:0.0.4'//colorPicker
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

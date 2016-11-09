@@ -14,9 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 public class About_Screen extends AppCompatActivity {
 
@@ -26,6 +29,7 @@ public class About_Screen extends AppCompatActivity {
     Button github_button,gplus,email_id,linkedIn;
     String TO,SUBJ;
     View changeLog;
+    ImageView appicon,profilepic;
 
 
     @Override
@@ -49,6 +53,11 @@ public class About_Screen extends AppCompatActivity {
         changeLog =(View)findViewById(R.id.changeLog);
         email_id =(Button)findViewById(R.id.email_id);
         linkedIn =(Button)findViewById(R.id.linkedin);
+        appicon =(ImageView)findViewById(R.id.app_icon);
+        profilepic =(ImageView)findViewById(R.id.profile_pic);
+
+        Picasso.with(this).load(R.drawable.my_photoshop_icon).into(appicon);
+        Picasso.with(this).load(R.drawable.me).into(profilepic);
 
         TO = getResources().getString(R.string.developer_mail);
         SUBJ = getResources().getString(R.string.app_name);
@@ -112,7 +121,7 @@ public class About_Screen extends AppCompatActivity {
                  });
         AlertDialog dialog = builder.create();
         dialog.show();
-        dialog.getWindow().setLayout(1000,1500);
+
     }
 
 

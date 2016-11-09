@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mytoolbar);
 
         // Setup drawer view
-        myNavigationDrawer = (NavigationView) findViewById(R.id.nvView);//  list of items
+        myNavigationDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(myNavigationDrawer);
 
         //for hamburger icon
-        myDrawer =(DrawerLayout)findViewById(R.id.drawer_layout);//drawer_layout in activity_main
+        myDrawer =(DrawerLayout)findViewById(R.id.drawer_layout);
         mydrawerToggle = setupDrawerToggle();
         myDrawer.addDrawerListener(mydrawerToggle);
 
@@ -259,7 +259,8 @@ public class MainActivity extends AppCompatActivity {
 
     //for hamburger icon
     private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, myDrawer, mytoolbar,R.string.drawer_open,R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, myDrawer, mytoolbar,
+                R.string.drawer_open,R.string.drawer_close);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
