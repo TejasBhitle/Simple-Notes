@@ -2,7 +2,7 @@
 Simple Notes is a material Design App with Colorful Notes.
 <br>
 <H4>Features:</H4>
-Password Protection<br>      					
+Password Protection<br>				
 Text To Speech with Google TTS.<br>
 Simple Material Design.<br>
 Pin Notes as notification.<br>
