@@ -1,4 +1,4 @@
-# Sinple Note
+# Simple Note
 Simple Notes is a material Design App with Colorful Notes.
 <br>
 <H4>Features:</H4>
