@@ -7,13 +7,14 @@
         android:allowBackup="true"
         android:icon="@drawable/my_photoshop_icon"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/DarkAppTheme">
-        <activity android:name=".MainActivity">
+        android:supportsRtl="true">
+        <activity android:name=".MainActivity"
+            android:theme="@style/DarkAppTheme">
         </activity>
 
         <activity android:name=".SplashScreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/DarkAppThemeNoTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -22,23 +23,29 @@
 
         <activity
             android:name=".Add_Screen"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/DarkAppThemeNoTranslucent">
         </activity>
         <activity android:name=".View_Screen"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/DarkAppThemeNoTranslucent">
         </activity>
         <activity android:name=".Locked_Screen"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/DarkAppThemeNoTranslucent">
         </activity>
         <activity android:name=".Trash_Screen"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/DarkAppThemeNoTranslucent">
         </activity>
         <activity
             android:name=".About_Screen"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/DarkAppThemeNoTranslucent">
         </activity>
         <activity android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/DarkAppThemeNoTranslucent">
         </activity>
     </application>
 

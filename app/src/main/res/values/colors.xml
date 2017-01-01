@@ -8,6 +8,8 @@
     <color name="dark_colorAccent">#FFB357</color>
     <color name="amoled_dark_theme_background">#000000</color>
 
+    <color name="card_bg">#616161</color>
+
     <!--Light theme colors-->
     <color name="light_theme_background">#e6e6e6</color>
     <color name="light_primaryDark">#f99f00</color>

@@ -50,8 +50,6 @@ public class SettingsActivity extends AppCompatActivity{
             getWindow().setStatusBarColor(getResources().getColor(R.color.dark_primaryDark));
         }
 
-
-
         setContentView(R.layout.setting_activity);
 
         SortSwitch =(Switch)findViewById(R.id.SortSwitch);

@@ -161,9 +161,8 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:text="Google+"
+                                android:text="Website"
                                 android:id="@+id/googleplus"
-                                android:onClick="email"
                                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
                             <Button
                                 android:layout_width="0dp"
@@ -171,7 +170,6 @@
                                 android:layout_height="wrap_content"
                                 android:text="LinkedIn"
                                 android:id="@+id/linkedin"
-                                android:onClick="email"
                                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
 
                         </LinearLayout>
