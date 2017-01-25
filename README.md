@@ -1,6 +1,9 @@
 # Simple Note
 Simple Notes is a material Design App with Colorful Notes.
 <br>
+
+![Alt text](https://github.com/TejasBhitle/Simple-Notes/blob/master/screenshots.jpg "Screenshots")
+
 <H4>Features:</H4>
 Password Protection.<br>
 Text To Speech with Google TTS.<br>
